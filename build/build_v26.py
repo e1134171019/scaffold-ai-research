@@ -8,7 +8,19 @@ import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "施工架AI換算研究_第五篇規則化總結版_v22.html"
-PARTS = sorted((ROOT / "build").glob("v26.delta.*.part"))
+BUILD_DIR = ROOT / "build"
+PART_NAMES = [
+    "v26.delta.00a.part",
+    "v26.delta.00b.part",
+    "v26.delta.01a.part",
+    "v26.delta.01b.part",
+    "v26.delta.02.part",
+    "v26.delta.03.part",
+    "v26.delta.04.part",
+    "v26.delta.05.part",
+    "v26.delta.06.part",
+]
+PARTS = [BUILD_DIR / name for name in PART_NAMES]
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
@@ -20,8 +32,10 @@ def sha256(data: bytes) -> str:
 def main() -> None:
     if not SOURCE.exists():
         raise FileNotFoundError(f"Missing source file: {SOURCE}")
-    if len(PARTS) != 7:
-        raise RuntimeError(f"Expected 7 delta parts, found {len(PARTS)}")
+
+    missing = [path.name for path in PARTS if not path.exists()]
+    if missing:
+        raise FileNotFoundError(f"Missing delta parts: {', '.join(missing)}")
 
     encoded = "".join(path.read_text(encoding="ascii").strip() for path in PARTS)
     payload = zlib.decompress(base64.b64decode(encoded))
