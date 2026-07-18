@@ -3,14 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=./施工架AI換算研究_第五篇規則化總結版_v22.html">
   <title>施工架配置數位化研究</title>
-  <script>
-    window.location.replace('./施工架AI換算研究_第五篇規則化總結版_v22.html');
-  </script>
+  <style>
+    html, body { margin: 0; min-height: 100%; }
+    body { display: grid; place-items: center; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; background: #f5f6f8; color: #1f2937; }
+    .loader { padding: 24px; text-align: center; line-height: 1.7; }
+  </style>
 </head>
 <body>
-  <p>正在開啟完整研究網站……</p>
-  <p><a href="./施工架AI換算研究_第五篇規則化總結版_v22.html">點此進入</a></p>
+  <div class="loader" id="loader">正在載入完整研究網站……</div>
+  <script>
+    (async () => {
+      const loader = document.getElementById('loader');
+      try {
+        const response = await fetch('./施工架AI換算研究_第五篇規則化總結版_v22.html', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+        let html = await response.text();
+        html = html.replace(
+          '</head>',
+          '<link rel="stylesheet" href="./narrative-v23.css"></head>'
+        );
+        html = html.replace(
+          '</body>',
+          '<script src="./narrative-v23.js"><\/script></body>'
+        );
+
+        document.open();
+        document.write(html);
+        document.close();
+      } catch (error) {
+        loader.innerHTML = '頁面載入失敗，請重新整理。<br><small>' + String(error.message || error) + '</small>';
+        console.error(error);
+      }
+    })();
+  </script>
 </body>
 </html>
