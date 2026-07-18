@@ -92,7 +92,7 @@
       }
     });
 
-    [...document.querySelectorAll('body *')].forEach((element) => {
+    [...bridge.querySelectorAll('*')].forEach((element) => {
       if (element.closest('.nv-feature-loop-v24, .feature-bridge-flow, script, style, template')) return;
       const text = (element.textContent || '').trim();
       if ((text === '→' || text === '↓') && element.children.length === 0) {
