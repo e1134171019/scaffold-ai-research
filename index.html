@@ -22,11 +22,11 @@
         let html = await response.text();
         html = html.replace(
           '</head>',
-          '<link rel="stylesheet" href="./narrative-v23.css"></head>'
+          '<link rel="stylesheet" href="./narrative-v23.css"><link rel="stylesheet" href="./feature-bridge-v24.css"></head>'
         );
         html = html.replace(
           '</body>',
-          '<script src="./narrative-v23.js"><\/script></body>'
+          '<script src="./narrative-v23.js"><\/script><script src="./feature-bridge-v24.js"><\/script></body>'
         );
 
         document.open();
