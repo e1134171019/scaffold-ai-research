@@ -1,0 +1,225 @@
+/* Narrative layer v23 — adds a concise, progressive story without replacing the original research page. */
+.narrative-v23 {
+  width: min(1080px, calc(100% - 32px));
+  margin: clamp(28px, 5vw, 72px) auto;
+  padding: clamp(22px, 4vw, 42px);
+  border: 1px solid rgba(128, 128, 128, 0.22);
+  border-radius: 24px;
+  background: rgba(128, 128, 128, 0.055);
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.narrative-v23 * {
+  box-sizing: border-box;
+}
+
+.narrative-v23 .nv-kicker {
+  margin: 0 0 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.62;
+}
+
+.narrative-v23 h3 {
+  margin: 0 0 14px;
+  max-width: 820px;
+  font-size: clamp(1.45rem, 2.6vw, 2.15rem);
+  line-height: 1.25;
+}
+
+.narrative-v23 .nv-lead,
+.narrative-v23 .nv-copy {
+  max-width: 850px;
+  margin: 0;
+  font-size: clamp(1rem, 1.35vw, 1.1rem);
+  line-height: 1.85;
+}
+
+.narrative-v23 .nv-copy + .nv-copy {
+  margin-top: 12px;
+}
+
+.nv-flow,
+.nv-timeline {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin: 26px 0;
+}
+
+.nv-step {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 78px;
+  padding: 14px 15px;
+  border: 1px solid rgba(128, 128, 128, 0.24);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.035);
+  text-align: center;
+  font-weight: 650;
+  line-height: 1.45;
+}
+
+.nv-arrow {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  padding: 0 2px;
+  font-size: 1.2rem;
+  opacity: 0.45;
+}
+
+.nv-lanes,
+.nv-role-grid,
+.nv-status-grid,
+.nv-summary-grid {
+  display: grid;
+  gap: 14px;
+  margin: 26px 0;
+}
+
+.nv-lanes {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.nv-role-grid,
+.nv-status-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.nv-summary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.nv-lane,
+.nv-role,
+.nv-status,
+.nv-summary-item {
+  padding: 18px;
+  border: 1px solid rgba(128, 128, 128, 0.22);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.nv-lane strong,
+.nv-role strong,
+.nv-status strong,
+.nv-summary-item strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.nv-lane p,
+.nv-role p,
+.nv-status p,
+.nv-summary-item p {
+  margin: 0;
+  line-height: 1.65;
+  opacity: 0.82;
+}
+
+.nv-lane .nv-mini-flow {
+  margin-top: 14px;
+  font-size: 0.94rem;
+  line-height: 1.75;
+  font-weight: 650;
+}
+
+.nv-key,
+.nv-question {
+  margin-top: 24px;
+  padding: 17px 19px;
+  border-left: 4px solid var(--nv-accent, #667eea);
+  border-radius: 0 14px 14px 0;
+  background: rgba(102, 126, 234, 0.095);
+  font-size: clamp(1.02rem, 1.5vw, 1.14rem);
+  line-height: 1.7;
+  font-weight: 650;
+}
+
+.nv-question {
+  border-left-color: rgba(128, 128, 128, 0.65);
+  background: rgba(128, 128, 128, 0.08);
+}
+
+.nv-note {
+  margin-top: 16px;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  opacity: 0.68;
+}
+
+.nv-stage-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: var(--nv-accent, #667eea);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 750;
+}
+
+.narrative-v23.nv-compact {
+  margin-top: 20px;
+  margin-bottom: 36px;
+}
+
+@media (max-width: 900px) {
+  .nv-role-grid,
+  .nv-status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nv-summary-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .narrative-v23 {
+    width: min(100% - 20px, 1080px);
+    border-radius: 18px;
+    padding: 20px 17px;
+  }
+
+  .nv-flow,
+  .nv-timeline {
+    flex-direction: column;
+  }
+
+  .nv-arrow {
+    min-height: 18px;
+    transform: rotate(90deg);
+  }
+
+  .nv-lanes,
+  .nv-role-grid,
+  .nv-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nv-step {
+    min-height: 62px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .narrative-v23 *,
+  .narrative-v23 *::before,
+  .narrative-v23 *::after {
+    scroll-behavior: auto !important;
+    transition: none !important;
+    animation: none !important;
+  }
+}
