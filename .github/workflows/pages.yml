@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   deploy:
@@ -25,8 +25,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build v26 website
+      - name: Build v27 website with narrative layer
         run: python build/build_v26.py
+
+      - name: Verify generated narrative assets
+        run: |
+          test -f _site/index.html
+          test -f _site/narrative-v23.js
+          test -f _site/storyline-v26.css
+          grep -q "narrative-v23.js?v=27" _site/index.html
+          grep -q "storyline-v26.css?v=27" _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
