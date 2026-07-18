@@ -1,0 +1,281 @@
+/* Feature bridge v24 — rebalance the engineering-feature section and keep all stage text horizontal. */
+.feature-bridge.nv-feature-bridge-v24 {
+  width: min(1180px, calc(100% - 40px));
+  max-width: 1180px;
+  margin: 64px auto 36px;
+  padding: clamp(30px, 4vw, 48px);
+  overflow: hidden;
+}
+
+.feature-bridge.nv-feature-bridge-v24,
+.feature-bridge.nv-feature-bridge-v24 * {
+  box-sizing: border-box;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-bridge-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
+  gap: clamp(34px, 4.5vw, 58px);
+  align-items: start;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-bridge-copy,
+.feature-bridge.nv-feature-bridge-v24 .feature-bridge-flow {
+  min-width: 0;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-kicker {
+  margin-bottom: 12px;
+  letter-spacing: 0.08em;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-bridge-copy h2 {
+  max-width: 560px;
+  margin: 0 0 20px;
+  font-size: clamp(34px, 3.6vw, 50px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-bridge-copy p {
+  max-width: 560px;
+  margin: 0;
+  font-size: clamp(15px, 1.35vw, 18px);
+  line-height: 1.78;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-bridge-copy p + p {
+  margin-top: 14px;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-bridge-flow {
+  padding-top: 4px;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-chip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-chip-grid span {
+  min-width: 0;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  text-align: center;
+  line-height: 1.35;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  writing-mode: horizontal-tb;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-arrow {
+  margin: 8px 0;
+  line-height: 1;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-node {
+  width: 100%;
+  min-height: 82px;
+  padding: 18px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-node strong {
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+.feature-bridge.nv-feature-bridge-v24 .feature-node small {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.5;
+}
+
+.nv-feature-loop-v24 {
+  width: 100%;
+  margin-top: clamp(30px, 4vw, 44px);
+  padding-top: clamp(24px, 3vw, 34px);
+  border-top: 1px solid rgba(15, 46, 61, 0.14);
+}
+
+.nv-feature-loop-v24__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 18px;
+}
+
+.nv-feature-loop-v24__header h3 {
+  margin: 0;
+  color: var(--fb-navy, #0f2e3d);
+  font-size: clamp(20px, 2vw, 27px);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.nv-feature-loop-v24__header p {
+  max-width: 480px;
+  margin: 0;
+  color: rgba(15, 46, 61, 0.66);
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: right;
+}
+
+.nv-feature-loop-v24__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.nv-feature-stage-v24 {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  min-height: 154px;
+  padding: 18px 16px 16px;
+  border: 1px solid rgba(15, 46, 61, 0.15);
+  border-radius: 16px;
+  background: rgba(255, 253, 249, 0.88);
+  box-shadow: 0 10px 26px rgba(15, 46, 61, 0.045);
+  writing-mode: horizontal-tb;
+  word-break: normal;
+  overflow-wrap: break-word;
+}
+
+.nv-feature-stage-v24:not(:last-child)::after {
+  content: "→";
+  position: absolute;
+  z-index: 3;
+  top: 28px;
+  right: -18px;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: #f3f5ee;
+  color: var(--fb-orange, #f47a35);
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.nv-feature-stage-v24__number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  height: 25px;
+  margin-bottom: 12px;
+  border-radius: 999px;
+  background: rgba(244, 122, 53, 0.11);
+  color: var(--fb-orange, #f47a35);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.nv-feature-stage-v24 h4 {
+  margin: 0 0 8px;
+  color: var(--fb-navy, #0f2e3d);
+  font-size: 17px;
+  line-height: 1.4;
+  word-break: keep-all;
+  overflow-wrap: normal;
+  writing-mode: horizontal-tb;
+}
+
+.nv-feature-stage-v24 p {
+  margin: 0;
+  color: rgba(15, 46, 61, 0.7);
+  font-size: 13px;
+  line-height: 1.62;
+  word-break: normal;
+  overflow-wrap: break-word;
+  writing-mode: horizontal-tb;
+}
+
+[data-nv-feature-legacy-hidden="true"] {
+  display: none !important;
+}
+
+@media (max-width: 980px) {
+  .feature-bridge.nv-feature-bridge-v24 .feature-bridge-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(380px, 1fr);
+    gap: 30px;
+  }
+
+  .feature-bridge.nv-feature-bridge-v24 .feature-bridge-copy h2 {
+    font-size: clamp(32px, 4.4vw, 44px);
+  }
+
+  .nv-feature-loop-v24__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .nv-feature-stage-v24:nth-child(3)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .feature-bridge.nv-feature-bridge-v24 {
+    width: min(100% - 20px, 1180px);
+    margin-top: 36px;
+    padding: 24px 18px;
+    border-radius: 20px;
+  }
+
+  .feature-bridge.nv-feature-bridge-v24 .feature-bridge-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .feature-bridge.nv-feature-bridge-v24 .feature-bridge-copy h2,
+  .feature-bridge.nv-feature-bridge-v24 .feature-bridge-copy p {
+    max-width: none;
+  }
+
+  .feature-bridge.nv-feature-bridge-v24 .feature-chip-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nv-feature-loop-v24__header {
+    display: block;
+  }
+
+  .nv-feature-loop-v24__header p {
+    margin-top: 8px;
+    max-width: none;
+    text-align: left;
+  }
+
+  .nv-feature-loop-v24__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .nv-feature-stage-v24 {
+    min-height: 0;
+    padding: 16px;
+  }
+
+  .nv-feature-stage-v24:not(:last-child)::after {
+    content: "↓";
+    top: auto;
+    right: 50%;
+    bottom: -16px;
+    transform: translateX(50%);
+  }
+}
