@@ -2,106 +2,185 @@
   'use strict';
 
   const blocks = {
-    'ACT 01': `
-      <div class="narrative-v23 nv-compact" id="narrative-act-01">
-        <p class="nv-kicker">問題從哪裡開始</p>
-        <h3>一個看似簡單的需求：能不能讓程式直接算出施工架數量？</h3>
-        <p class="nv-lead">客戶目前由專業人員依建築 CAD 圖面判斷搭設位置、排列方式與所需數量。結果會影響報價、備料與現場安排，因此希望降低人工時間與計算差異。</p>
-        <div class="nv-flow" aria-label="最初構想流程">
-          <div class="nv-step">建築 CAD</div><div class="nv-arrow">→</div>
-          <div class="nv-step">辨識施工架</div><div class="nv-arrow">→</div>
-          <div class="nv-step">統計數量</div>
-        </div>
-        <p class="nv-copy">這個流程成立的前提，是圖面中已經畫好了施工架。但實際資料不一定如此。</p>
-        <div class="nv-question">程式究竟是在讀取施工架，還是必須先建立施工架？</div>
-      </div>`,
-
     'ACT 02': `
       <div class="narrative-v23 nv-compact" id="narrative-act-02">
-        <p class="nv-kicker">重新定義問題</p>
-        <h3>同樣是 CAD，實際上可能是兩種完全不同的任務</h3>
-        <div class="nv-lanes">
-          <div class="nv-lane">
-            <strong>圖面已畫好施工架</strong>
-            <p>答案已經存在於圖面中，程式負責讀取、計數與檢查。</p>
-            <div class="nv-mini-flow">人工配置 → 讀取 → 計算 → 稽核</div>
-          </div>
-          <div class="nv-lane">
-            <strong>圖面只有建築結構</strong>
-            <p>圖面中尚未有施工架，必須先確認搭設範圍並建立配置。</p>
-            <div class="nv-mini-flow">建築圖 → 搭設範圍 → 生成配置 → 計算</div>
-          </div>
+        <p class="nv-kicker">工程規則從哪裡來</p>
+        <h3>先理解人工怎麼搭，才知道程式最後要算什麼</h3>
+        <p class="nv-lead">施工架不是把牆長除以固定尺寸就結束。基本架跨可以先建立基準，但外凸轉角、內凹轉角、短跨、雨遮、女兒牆與屋頂等條件，會改變主架位置、收尾方式與實際數量。</p>
+        <div class="nv-flow" aria-label="施工架工程特徵整理流程">
+          <div class="nv-step">基本架跨<br>183 × 80</div><div class="nv-arrow">→</div>
+          <div class="nv-step">外凸／內凹<br>轉角</div><div class="nv-arrow">→</div>
+          <div class="nv-step">短跨與<br>收尾</div><div class="nv-arrow">→</div>
+          <div class="nv-step">雨遮、突出物<br>與屋頂條件</div>
         </div>
-        <p class="nv-copy">因此，數量不是直接藏在建築線段裡。外牆、內牆與結構線只能提供幾何，真正的數量取決於施工架最後如何排列。</p>
-        <div class="nv-key">施工架數量是配置的結果；沒有先建立配置，就沒有可靠數量。</div>
+        <p class="nv-copy">建築外形可以不同，但施工架配置面對的工程事件會反覆出現。研究重點不是替每一棟建築重新寫程式，而是把這些事件整理成可辨識、可組合、可驗證的工程特徵。</p>
+        <div class="nv-key">第二篇回答的是：施工架為什麼這樣搭，以及哪些判斷能被整理成通用規則。</div>
       </div>`,
 
     'ACT 03': `
       <div class="narrative-v23 nv-compact" id="narrative-act-03">
-        <p class="nv-kicker">把問題變成可計算流程</p>
-        <h3>第一版不必理解整張建築圖，只保留施工架真正需要的資訊</h3>
-        <p class="nv-lead">使用者可先關閉無關圖層，只保留外牆、內牆、柱與必要障礙。結構線提供位置、長度與轉角，但「哪裡需要搭設」仍要由人員或施工資料確認。</p>
-        <div class="nv-flow" aria-label="建築圖轉為施工架配置流程">
-          <div class="nv-step">保留結構線</div><div class="nv-arrow">→</div>
-          <div class="nv-step">確認搭設範圍</div><div class="nv-arrow">→</div>
-          <div class="nv-step">建立輪廓與離牆路徑</div><div class="nv-arrow">→</div>
-          <div class="nv-step">辨識線段、轉角與障礙</div><div class="nv-arrow">→</div>
-          <div class="nv-step">生成配置</div>
+        <p class="nv-kicker">把工程經驗轉成程式條件</p>
+        <h3>先確認程式看得到什麼、能確定什麼，再決定要不要使用 AI</h3>
+        <p class="nv-lead">前一篇整理的是工程特徵；這一篇則把特徵轉成 CAD 可讀資料，例如圖層、圖塊、線段、文字、尺寸與座標。程式只能根據實際輸入做判斷，缺少關鍵資訊時必須停止，而不是自行補猜。</p>
+        <div class="nv-flow" aria-label="CAD 輸入轉為可計算資料流程">
+          <div class="nv-step">最低必要輸入</div><div class="nv-arrow">→</div>
+          <div class="nv-step">幾何操作</div><div class="nv-arrow">→</div>
+          <div class="nv-step">工程約束</div><div class="nv-arrow">→</div>
+          <div class="nv-step">結果狀態與停止條件</div>
         </div>
         <div class="nv-role-grid">
-          <div class="nv-role"><strong>人工</strong><p>確認哪裡需要搭、搭設側與施工條件。</p></div>
-          <div class="nv-role"><strong>幾何核心</strong><p>處理尺寸、輪廓、偏移、相交與碰撞。</p></div>
-          <div class="nv-role"><strong>配置規則</strong><p>處理架跨、轉角、短跨與障礙避讓。</p></div>
-          <div class="nv-role"><strong>AI</strong><p>提出圖層、線段與特殊區域候選，不直接決定正式數量。</p></div>
+          <div class="nv-role"><strong>人工</strong><p>確認搭設範圍、施工側與無法從圖面判斷的條件。</p></div>
+          <div class="nv-role"><strong>幾何核心</strong><p>處理輪廓、長度、偏移、相交、轉角與碰撞。</p></div>
+          <div class="nv-role"><strong>規則核心</strong><p>處理架跨、主架關係、短跨、收尾與障礙避讓。</p></div>
+          <div class="nv-role"><strong>AI</strong><p>協助模糊圖層、文字與相似案例，不直接決定正式數量。</p></div>
         </div>
-        <p class="nv-copy">建築外形雖然可能無限變化，程式不需要為 L 形、U 形或每一種特殊形狀分別寫規則；所有形狀都先轉成輪廓、線段、轉角、障礙與連續路徑。</p>
-        <div class="nv-key">不針對「形狀」寫規則，而是針對「幾何操作」與「配置決策」建立通用流程。</div>
         <div class="nv-status-grid" aria-label="計算結果狀態">
           <div class="nv-status"><strong>已確認</strong><p>條件完整，可輸出正式結果。</p></div>
-          <div class="nv-status"><strong>條件式</strong><p>依明確列出的假設進行估算。</p></div>
+          <div class="nv-status"><strong>條件式</strong><p>依清楚列出的假設進行估算。</p></div>
           <div class="nv-status"><strong>多候選</strong><p>存在數個可行配置，需要人工選擇。</p></div>
           <div class="nv-status"><strong>無法判斷</strong><p>資訊不足、互相矛盾或規則尚未涵蓋。</p></div>
         </div>
+        <div class="nv-key">第三篇回答的是：哪些資料能直接計算、哪些需要人工確認、哪些情況必須停止。</div>
       </div>`,
 
     'ACT 04': `
       <div class="narrative-v23 nv-compact" id="narrative-act-04">
         <p class="nv-kicker">三個方案的真正關係</p>
-        <h3>不是三個平行產品，而是同一套系統逐步成熟的路徑</h3>
-        <p class="nv-lead">要讓系統從沒有施工架的建築圖面生成配置，不能直接跳到全自動。必須先記錄人工怎麼做，再確認哪些經驗能穩定成為規則。</p>
+        <h3>不是三個平行產品，而是同一套工程核心逐步成熟的路徑</h3>
+        <p class="nv-lead">若直接從建築圖跳到全自動配置，系統沒有足夠案例驗證規則，也無法知道錯誤發生在哪裡。因此三個方案必須依序累積資料、驗證規則，再提高自動化程度。</p>
         <div class="nv-timeline" aria-label="三階段發展流程">
           <div class="nv-step"><span><span class="nv-stage-number">1</span><br>方案一<br>取得與稽核人工配置</span></div><div class="nv-arrow">→</div>
-          <div class="nv-step"><span><span class="nv-stage-number">2</span><br>方案二<br>驗證規則成立與失效邊界</span></div><div class="nv-arrow">→</div>
-          <div class="nv-step"><span><span class="nv-stage-number">3</span><br>方案三<br>使用已驗證規則生成候選配置</span></div>
+          <div class="nv-step"><span><span class="nv-stage-number">2</span><br>方案二<br>批次驗證規則與失效邊界</span></div><div class="nv-arrow">→</div>
+          <div class="nv-step"><span><span class="nv-stage-number">3</span><br>方案三<br>生成可比較的候選配置</span></div>
         </div>
-        <div class="nv-key">方案一取得經驗，方案二驗證經驗，方案三使用經驗。</div>
+        <div class="nv-key">方案一取得經驗，方案二驗證經驗，方案三使用已驗證的經驗。</div>
       </div>`,
 
     'ACT 05': `
       <div class="narrative-v23 nv-compact" id="narrative-act-05">
-        <p class="nv-kicker">研究閉環</p>
-        <h3>規則不是一次寫完，而是在案例、驗證與修正中逐步收斂</h3>
+        <p class="nv-kicker">研究如何收束</p>
+        <h3>第五篇不是再增加新方案，而是把整個專案收斂成可追蹤的規則化路徑</h3>
+        <p class="nv-lead">施工架規則不會一次寫完。每次加入新案例，都要確認既有規則是否仍成立、失敗區域是否縮小，以及新規則有沒有破壞原本正確的案例。</p>
         <div class="nv-flow" aria-label="規則建立閉環">
-          <div class="nv-step">專家配置</div><div class="nv-arrow">→</div>
-          <div class="nv-step">結構化案例</div><div class="nv-arrow">→</div>
+          <div class="nv-step">人工配置案例</div><div class="nv-arrow">→</div>
+          <div class="nv-step">工程特徵標記</div><div class="nv-arrow">→</div>
           <div class="nv-step">候選規則</div><div class="nv-arrow">→</div>
-          <div class="nv-step">大量案例驗證</div><div class="nv-arrow">→</div>
-          <div class="nv-step">版本化規則</div>
+          <div class="nv-step">邊界分析</div><div class="nv-arrow">→</div>
+          <div class="nv-step">全案例回歸</div>
         </div>
         <div class="nv-summary-grid">
-          <div class="nv-summary-item"><strong>任意建築形狀</strong><p>轉換成有限的幾何操作與路徑事件。</p></div>
-          <div class="nv-summary-item"><strong>專家配置經驗</strong><p>整理成工程約束與配置策略。</p></div>
-          <div class="nv-summary-item"><strong>失敗與未知案例</strong><p>用來補充例外、停止條件與適用邊界。</p></div>
+          <div class="nv-summary-item"><strong>即時稽核</strong><p>在 AutoCAD 中讀取、計算、標記與回到原圖。</p></div>
+          <div class="nv-summary-item"><strong>離線驗證</strong><p>批次測試歷史圖面，分析規則成功率與失效邊界。</p></div>
+          <div class="nv-summary-item"><strong>候選生成</strong><p>只使用已驗證規則產生配置，並保留人工選擇。</p></div>
         </div>
-        <div class="nv-key">知識工程建立配置規則；大量工程圖讓規則知道自己的適用邊界。</div>
+        <div class="nv-key">最終成果不是一個會猜答案的 AI，而是一套可驗證、可追蹤、可持續擴充的施工架工程規則系統。</div>
       </div>`
   };
 
+  const storyline = [
+    {
+      act: 'ACT 01',
+      title: '問題從哪裡開始？',
+      copy: '客戶要算組數、主架與尺寸，但第一步必須先判斷圖面中是否已經存在施工架。'
+    },
+    {
+      act: 'ACT 02',
+      title: '施工架為什麼這樣搭？',
+      copy: '從基本架跨、轉角、短跨與特殊條件，整理反覆出現的工程特徵。'
+    },
+    {
+      act: 'ACT 03',
+      title: '程式能確定什麼？',
+      copy: '把工程經驗轉成最低輸入、幾何操作、工程約束、結果狀態與停止條件。'
+    },
+    {
+      act: 'ACT 04',
+      title: '為什麼分成三方案？',
+      copy: '方案一取得案例，方案二驗證規則，方案三使用已驗證規則生成候選配置。'
+    },
+    {
+      act: 'ACT 05',
+      title: '系統如何持續收斂？',
+      copy: '透過特徵標記、邊界分析、版本化與全案例回歸，形成完整研究閉環。'
+    }
+  ];
+
   const normalize = (value) => (value || '').replace(/\s+/g, ' ').trim().toUpperCase();
+
+  function rewriteHero() {
+    const hero = document.querySelector('#act1');
+    if (!hero) return;
+
+    const eyebrow = hero.querySelector('.eyebrow');
+    const title = hero.querySelector('h1');
+    const lead = hero.querySelector('.hero-lead');
+    const stats = [...hero.querySelectorAll('.stat')];
+    const clientNote = hero.querySelector('.client-note');
+    const clarifier = hero.querySelector('.hero-clarifier');
+
+    if (eyebrow) eyebrow.textContent = 'ACT 01 · 問題從哪裡開始';
+    if (title) title.innerHTML = '問題，從一張<br><em>施工架 DWG</em><br>開始。';
+    if (lead) {
+      lead.textContent = '客戶希望從 CAD 圖面得到施工架組數、主架數量，並檢查標註尺寸是否正確。真正的第一個問題不是「AI 能不能算」，而是這張圖裡究竟已經畫了施工架，還是只有建築結構。兩種輸入代表完全不同的任務。';
+    }
+
+    const statContent = [
+      ['輸入', '建築圖或施工架配置圖'],
+      ['輸出', '組數、主架與尺寸稽核'],
+      ['核心', '先辨識輸入，再進行計算']
+    ];
+    stats.slice(0, 3).forEach((element, index) => {
+      const item = statContent[index];
+      if (item) element.innerHTML = `<b>${item[0]}</b><span>${item[1]}</span>`;
+    });
+
+    if (clientNote) {
+      clientNote.innerHTML = '<strong>第一個判斷：</strong> 圖面中已經存在人工配置的施工架，還是程式必須先建立施工架配置？';
+    }
+
+    if (clarifier) {
+      clarifier.innerHTML = `
+        <span>第一篇的研究邊界</span>
+        <p>先不回答如何全自動生成施工架；第一步是把人工繪製的 DWG 轉成一致、可計算、可追溯的工程資料。</p>
+        <small>客戶提出的是「鷹架數量」需求；進入工程規則與程式設計後，統一使用「施工架」。</small>
+      `;
+    }
+  }
+
+  function insertStoryline() {
+    if (document.getElementById('storyline-v23')) return;
+    const hero = document.querySelector('#act1');
+    if (!hero?.parentElement) return;
+
+    const section = document.createElement('section');
+    section.id = 'storyline-v23';
+    section.className = 'storyline-v23';
+    section.innerHTML = `
+      <header class="storyline-v23__header">
+        <div>
+          <p>研究敘事總覽</p>
+          <h2>整理後的五篇故事線</h2>
+        </div>
+        <span>每一篇只回答一個問題，並把下一篇需要的條件交出去。</span>
+      </header>
+      <div class="storyline-v23__grid">
+        ${storyline.map((item, index) => `
+          <article class="storyline-v23__item">
+            <b>${item.act}</b>
+            <h3>${item.title}</h3>
+            <p>${item.copy}</p>
+            ${index < storyline.length - 1 ? '<i aria-hidden="true">→</i>' : ''}
+          </article>
+        `).join('')}
+      </div>
+    `;
+
+    hero.insertAdjacentElement('afterend', section);
+  }
 
   function findMarker(label) {
     const exact = [...document.querySelectorAll('body *')].find((element) => {
-      if (element.closest('.narrative-v23, script, style, template')) return false;
+      if (element.closest('.narrative-v23, .storyline-v23, script, style, template')) return false;
       if (element.children.length > 2) return false;
       return normalize(element.textContent) === label;
     });
@@ -109,7 +188,7 @@
 
     const expression = new RegExp(`^${label.replace(' ', '\\s*')}(?:\\b|\\s|[｜|·:：])`, 'i');
     return [...document.querySelectorAll('body h1, body h2, body h3, body h4, body p, body span, body div')].find((element) => {
-      if (element.closest('.narrative-v23, script, style, template')) return false;
+      if (element.closest('.narrative-v23, .storyline-v23, script, style, template')) return false;
       return expression.test((element.textContent || '').trim()) && (element.textContent || '').trim().length < 90;
     }) || null;
   }
@@ -151,14 +230,14 @@
 
   function insertNarrative(label, nextLabel) {
     const id = `narrative-act-${label.slice(-2)}`;
-    if (document.getElementById(id)) return;
+    document.getElementById(id)?.remove();
 
     const marker = findMarker(label);
     if (!marker) return;
 
     const section = findSection(marker, label, nextLabel);
     const anchor = findAnchor(section, marker);
-    if (!anchor || !anchor.parentElement) return;
+    if (!anchor?.parentElement || !blocks[label]) return;
 
     const template = document.createElement('template');
     template.innerHTML = blocks[label].trim();
@@ -177,7 +256,7 @@
     while (walker.nextNode()) nodes.push(walker.currentNode);
 
     for (const node of nodes) {
-      if (node.parentElement?.closest('script, style, template, .narrative-v23')) continue;
+      if (node.parentElement?.closest('script, style, template, .narrative-v23, .storyline-v23')) continue;
       let text = node.nodeValue;
       for (const [from, to] of replacements) text = text.split(from).join(to);
       if (text !== node.nodeValue) node.nodeValue = text;
@@ -185,7 +264,10 @@
   }
 
   function boot() {
-    const labels = ['ACT 01', 'ACT 02', 'ACT 03', 'ACT 04', 'ACT 05'];
+    rewriteHero();
+    insertStoryline();
+
+    const labels = ['ACT 02', 'ACT 03', 'ACT 04', 'ACT 05'];
     labels.forEach((label, index) => insertNarrative(label, labels[index + 1] || null));
     replaceLegacyTerms();
   }
