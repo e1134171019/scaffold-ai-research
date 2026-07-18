@@ -4,6 +4,7 @@ import base64
 import hashlib
 import json
 from pathlib import Path
+import shutil
 import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,9 +25,54 @@ PARTS = [BUILD_DIR / name for name in PART_NAMES]
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
+SITE_ASSETS = [
+    "narrative-v23.css",
+    "storyline-v26.css",
+    "feature-bridge-v24.css",
+    "narrative-v23.js",
+    "feature-bridge-v24.js",
+]
+
+STYLE_MARKUP = (
+    '<link rel="stylesheet" href="./narrative-v23.css?v=27">'
+    '<link rel="stylesheet" href="./storyline-v26.css?v=27">'
+    '<link rel="stylesheet" href="./feature-bridge-v24.css?v=27">'
+    '<style>@media (max-width:760px){'
+    '.nv-feature-stage-v24:not(:last-child)::after{display:grid}'
+    '}</style>'
+)
+
+SCRIPT_MARKUP = (
+    '<script src="./narrative-v23.js?v=27"></script>'
+    '<script src="./feature-bridge-v24.js?v=27"></script>'
+)
+
 
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def inject_site_assets(html: str) -> str:
+    """Attach the narrative/layout layer to the generated single-page report."""
+    if "narrative-v23.css?v=27" not in html:
+        if "</head>" not in html:
+            raise RuntimeError("Generated HTML is missing </head>")
+        html = html.replace("</head>", f"{STYLE_MARKUP}</head>", 1)
+
+    if "narrative-v23.js?v=27" not in html:
+        if "</body>" not in html:
+            raise RuntimeError("Generated HTML is missing </body>")
+        html = html.replace("</body>", f"{SCRIPT_MARKUP}</body>", 1)
+
+    return html
+
+
+def copy_site_assets() -> None:
+    for name in SITE_ASSETS:
+        source = ROOT / name
+        if not source.exists():
+            raise FileNotFoundError(f"Missing site asset: {source}")
+        shutil.copy2(source, OUTPUT_DIR / name)
 
 
 def main() -> None:
@@ -61,9 +107,14 @@ def main() -> None:
         raise RuntimeError("Generated v26 checksum verification failed")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_bytes(final)
+
+    html = final.decode("utf-8")
+    html = inject_site_assets(html)
+    OUTPUT.write_text(html, encoding="utf-8")
+    copy_site_assets()
+
     (OUTPUT_DIR / ".nojekyll").write_text("", encoding="utf-8")
-    print(f"Generated {OUTPUT} ({len(final):,} bytes)")
+    print(f"Generated {OUTPUT} ({OUTPUT.stat().st_size:,} bytes) with narrative assets")
 
 
 if __name__ == "__main__":
