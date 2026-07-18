@@ -22,7 +22,7 @@
         let html = await response.text();
         html = html.replace(
           '</head>',
-          '<link rel="stylesheet" href="./narrative-v23.css"><link rel="stylesheet" href="./feature-bridge-v24.css"></head>'
+          '<link rel="stylesheet" href="./narrative-v23.css"><link rel="stylesheet" href="./feature-bridge-v24.css"><style>@media (max-width:760px){.nv-feature-stage-v24:not(:last-child)::after{display:grid}}</style></head>'
         );
         html = html.replace(
           '</body>',
