@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build v29 website with revised ACT 03
+      - name: Build v30 website with revised ACT 04
         run: python build/build_v26.py
 
       - name: Verify generated narrative assets
@@ -35,10 +35,12 @@ jobs:
           test -f _site/feature-bridge-v24.js
           test -f _site/act3-v29.js
           test -f _site/act3-v29.css
-          grep -q "narrative-v23.js?v=29" _site/index.html
-          grep -q "feature-bridge-v24.js?v=29" _site/index.html
-          grep -q "act3-v29.js?v=29" _site/index.html
-          grep -q "act3-v29.css?v=29" _site/index.html
+          test -f _site/act4-v30.js
+          test -f _site/act4-v30.css
+          grep -q "narrative-v23.js?v=30" _site/index.html
+          grep -q "act3-v29.js?v=30" _site/index.html
+          grep -q "act4-v30.js?v=30" _site/index.html
+          grep -q "act4-v30.css?v=30" _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
