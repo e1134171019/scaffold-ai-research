@@ -1,0 +1,107 @@
+/* ACT 03 v29 — move system roles before the gates and strengthen the output principle. */
+.act3.act3-v29 .act3-head h2 em {
+  color: inherit;
+  font-style: normal;
+}
+
+.act3.act3-v29 .act3-principle-v29,
+.act3.act3-v29 .act3-gate-intro-v29 {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.act3.act3-v29 .act3-principle-v29 {
+  margin: clamp(26px, 4vw, 44px) 0 24px;
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid rgba(15, 46, 61, 0.14);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.act3.act3-v29 .act3-principle-v29 > header {
+  max-width: 820px;
+  margin-bottom: 20px;
+}
+
+.act3.act3-v29 .act3-principle-v29 > header span,
+.act3.act3-v29 .act3-gate-intro-v29 > span {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: #f47a35;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+.act3.act3-v29 .act3-principle-v29 h3 {
+  margin: 0 0 10px;
+  color: #0f2e3d;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.35;
+}
+
+.act3.act3-v29 .act3-principle-v29 p,
+.act3.act3-v29 .act3-gate-intro-v29 p {
+  margin: 0;
+  color: rgba(15, 46, 61, 0.74);
+  font-size: 15px;
+  line-height: 1.78;
+}
+
+.act3.act3-v29 .act3-principle-v29 .act3-role-summary {
+  margin: 0;
+}
+
+.act3.act3-v29 .act3-gate-intro-v29 {
+  margin: 0 0 22px;
+  padding: 20px 22px;
+  border-left: 4px solid #f47a35;
+  border-radius: 0 16px 16px 0;
+  background: rgba(244, 122, 53, 0.08);
+}
+
+.act3.act3-v29 .three-gate-grid {
+  margin-top: 0;
+}
+
+.act3.act3-v29 .act3-final-gate {
+  border-width: 2px;
+  box-shadow: 0 16px 36px rgba(15, 46, 61, 0.08);
+}
+
+.act3.act3-v29 .act3-final-gate strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: clamp(22px, 2.5vw, 30px);
+  line-height: 1.35;
+}
+
+.act3.act3-v29 .act3-final-gate p {
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.75;
+}
+
+.act3.act3-v29 .act3-final-gate p b {
+  display: block;
+  margin-top: 10px;
+}
+
+.act3.act3-v29 .act3-details summary strong {
+  line-height: 1.5;
+}
+
+@media (max-width: 760px) {
+  .act3.act3-v29 .act3-head h2 br {
+    display: none;
+  }
+
+  .act3.act3-v29 .act3-principle-v29 {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .act3.act3-v29 .act3-gate-intro-v29 {
+    padding: 18px 16px;
+  }
+}
