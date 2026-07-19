@@ -1,0 +1,277 @@
+/* ACT 04 v30 — present the three schemes as maturity stages, not parallel options. */
+.act4.act4-v30 .act4-head {
+  max-width: 1040px;
+}
+
+.act4.act4-v30 .act4-head h2 {
+  max-width: 980px;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+
+.act4.act4-v30 .act4-narrative {
+  max-width: 930px;
+  margin-top: 22px;
+  padding-left: 20px;
+}
+
+.act4.act4-v30 .act4-narrative p {
+  margin-bottom: 10px;
+  line-height: 1.75;
+}
+
+.act4.act4-v30 .act4-keyword-recap,
+.act4.act4-v30 .act4-focus-note {
+  display: none !important;
+}
+
+.act4.act4-v30 .three-route-line {
+  margin-top: 28px;
+  padding: 18px;
+  gap: 12px;
+}
+
+.act4.act4-v30 .three-route-line > div {
+  min-height: 118px;
+  padding: 18px;
+}
+
+.act4.act4-v30 .three-route-line > div > span {
+  font-size: 10px;
+  letter-spacing: .12em;
+}
+
+.act4.act4-v30 .three-route-line b {
+  margin-top: 8px;
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.act4.act4-v30 .three-route-line small {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.act4.act4-v30 .scheme-one,
+.act4.act4-v30 .scheme-two,
+.act4.act4-v30 .scheme-three {
+  margin-top: 76px;
+}
+
+.act4.act4-v30 .scheme-two,
+.act4.act4-v30 .scheme-three {
+  padding-top: 68px;
+}
+
+.act4.act4-v30 .scheme-heading {
+  grid-template-columns: minmax(0, 1.18fr) minmax(300px, .82fr);
+  gap: 34px;
+  align-items: stretch;
+  margin-bottom: 20px;
+}
+
+.act4.act4-v30 .scheme-heading > div:first-child {
+  min-width: 0;
+}
+
+.act4.act4-v30 .scheme-heading h3 {
+  margin-top: 11px;
+  text-wrap: balance;
+}
+
+.act4.act4-v30 .scheme-heading p {
+  max-width: 720px;
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.act4.act4-v30 .scheme-core {
+  min-height: 132px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 22px;
+  border-radius: 0 16px 16px 0;
+}
+
+.act4.act4-v30 .scheme-core span {
+  margin-bottom: 7px;
+  font-size: 10px;
+  letter-spacing: .11em;
+}
+
+.act4.act4-v30 .scheme-core strong {
+  margin-top: 0;
+  font-size: 19px;
+  line-height: 1.45;
+}
+
+.act4.act4-v30 .scheme-operation-flow.act4-operation-v30 {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 21px;
+  background: rgba(255, 253, 248, .86);
+  color: var(--green);
+  box-shadow: 0 12px 30px rgba(41, 79, 63, .045);
+}
+
+.act4.act4-v30 .scheme-operation-flow.act4-operation-v30 > div {
+  min-height: 104px !important;
+  padding: 15px;
+  border: 1px solid rgba(41, 79, 63, .11);
+  background: #f7f3eb;
+}
+
+.act4.act4-v30 .scheme-operation-flow.act4-operation-v30 span {
+  color: var(--orange);
+}
+
+.act4.act4-v30 .scheme-operation-flow.act4-operation-v30 b {
+  color: var(--green);
+  font-size: 14px;
+}
+
+.act4.act4-v30 .scheme-operation-flow.act4-operation-v30 small {
+  color: var(--muted);
+}
+
+.act4.act4-v30 .scheme-operation-flow.act4-operation-v30 i {
+  color: var(--orange);
+}
+
+.act4-output-v30 {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  margin-top: 14px;
+  padding: 17px 20px;
+  border: 1px solid rgba(41, 79, 63, .13);
+  border-radius: 16px;
+  background: rgba(220, 230, 217, .42);
+}
+
+.act4-output-v30 span {
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.act4-output-v30 strong {
+  color: var(--green);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.act4.act4-v30 .scheme-two .act4-output-v30 {
+  border-color: rgba(79, 123, 136, .18);
+  background: rgba(220, 232, 235, .46);
+}
+
+.act4.act4-v30 .scheme-two .act4-output-v30 span {
+  color: #4f7b88;
+}
+
+.act4.act4-v30 .scheme-three .act4-output-v30 {
+  border-color: rgba(168, 101, 67, .18);
+  background: rgba(239, 226, 215, .5);
+}
+
+.act4.act4-v30 .scheme-three .act4-output-v30 span {
+  color: #a86543;
+}
+
+.act4.act4-v30 .scheme-flow-card.act4-tech-trigger-v30 {
+  width: 100%;
+  margin-top: 14px;
+  padding: 17px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-radius: 16px;
+  box-shadow: none;
+  transform: none;
+}
+
+.act4.act4-v30 .scheme-flow-card.act4-tech-trigger-v30:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 34px rgba(20, 25, 22, .14);
+}
+
+.act4.act4-v30 .scheme-flow-card.act4-tech-trigger-v30 span {
+  color: rgba(255, 255, 255, .83);
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.act4.act4-v30 .scheme-flow-card.act4-tech-trigger-v30 b {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: white;
+  font-size: 17px;
+}
+
+.act4.act4-v30 .scheme-two-card.act4-tech-trigger-v30 b {
+  background: #4f7b88;
+}
+
+.act4.act4-v30 .scheme-three-card.act4-tech-trigger-v30 b {
+  background: #a86543;
+}
+
+@media (max-width: 900px) {
+  .act4.act4-v30 .scheme-heading {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .act4.act4-v30 .scheme-core {
+    min-height: 0;
+    border-radius: 0 14px 14px 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .act4.act4-v30 .act4-head h2 {
+    font-size: clamp(38px, 11vw, 58px);
+  }
+
+  .act4.act4-v30 .three-route-line {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .act4.act4-v30 .three-route-line > i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+
+  .act4.act4-v30 .scheme-operation-flow.act4-operation-v30 {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  .act4.act4-v30 .scheme-operation-flow.act4-operation-v30 > i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+
+  .act4-output-v30 {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .act4.act4-v30 .scheme-flow-card.act4-tech-trigger-v30 {
+    align-items: flex-start;
+  }
+}
