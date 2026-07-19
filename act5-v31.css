@@ -1,0 +1,337 @@
+/* ACT 05 v31 — final summary hierarchy: core loop, four difficulties, conclusion, then technical references. */
+#act5.act5-v31 .act5-head {
+  max-width: 920px;
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+#act5.act5-v31 .act5-head h2 {
+  max-width: 900px;
+  font-size: clamp(38px, 5vw, 66px);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+#act5.act5-v31 .act5-head p {
+  max-width: 760px;
+  font-size: clamp(16px, 1.5vw, 19px);
+  line-height: 1.8;
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 30px);
+  align-items: stretch;
+  margin: 0 0 clamp(44px, 6vw, 76px);
+  padding: clamp(22px, 3.5vw, 40px);
+  border: 1px solid rgba(15, 46, 61, 0.15);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 252, 246, 0.96), rgba(239, 245, 241, 0.96));
+  box-shadow: 0 24px 60px rgba(15, 46, 61, 0.08);
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 article {
+  min-width: 0;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(24px, 3vw, 38px);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(15, 46, 61, 0.12);
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 article > span {
+  color: #f47a35;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 h3 {
+  margin: 14px 0 12px;
+  color: #0f2e3d;
+  font-size: clamp(22px, 2.4vw, 31px);
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 p {
+  margin: 0;
+  color: rgba(15, 46, 61, 0.72);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 > i {
+  align-self: center;
+  min-width: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: #f47a35;
+  font-style: normal;
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 > i b {
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1;
+}
+
+#act5.act5-v31 .act5-loop-anchor-v31 > i small {
+  color: rgba(15, 46, 61, 0.58);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+#act5.act5-v31 .act5-block-head {
+  margin-bottom: 22px;
+}
+
+#act5.act5-v31 .act5-block-head > span {
+  color: #f47a35;
+  letter-spacing: 0.08em;
+}
+
+#act5.act5-v31 .act5-block-head h3 {
+  max-width: 760px;
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+#act5.act5-v31 .act5-challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+#act5.act5-v31 .act5-challenge-grid article {
+  min-width: 0;
+  padding: clamp(22px, 2.5vw, 30px);
+  border: 1px solid rgba(15, 46, 61, 0.14);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 12px 28px rgba(15, 46, 61, 0.045);
+}
+
+#act5.act5-v31 .act5-challenge-grid article > span {
+  color: #f47a35;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+#act5.act5-v31 .act5-challenge-grid h4 {
+  margin: 12px 0 10px;
+  color: #0f2e3d;
+  font-size: clamp(19px, 2vw, 24px);
+  line-height: 1.35;
+}
+
+#act5.act5-v31 .act5-challenge-grid p {
+  margin: 0;
+  color: rgba(15, 46, 61, 0.72);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+#act5.act5-v31 .act5-conclusion {
+  margin: clamp(44px, 6vw, 78px) 0 26px;
+  padding: clamp(30px, 4vw, 52px);
+  border-radius: 24px;
+  background: #0f2e3d;
+  color: #fff;
+  box-shadow: 0 26px 64px rgba(15, 46, 61, 0.18);
+}
+
+#act5.act5-v31 .act5-conclusion > span {
+  color: #ff9b5f;
+  letter-spacing: 0.1em;
+}
+
+#act5.act5-v31 .act5-conclusion > h3 {
+  max-width: 940px;
+  margin: 15px 0 16px;
+  color: #fff;
+  font-size: clamp(30px, 4vw, 49px);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+#act5.act5-v31 .act5-conclusion > p {
+  max-width: 810px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+#act5.act5-v31 .act5-conclusion > blockquote {
+  max-width: 880px;
+  margin: 24px 0 0;
+  padding: 18px 20px;
+  border-left: 4px solid #f47a35;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 0 14px 14px 0;
+  color: #fff;
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.65;
+}
+
+#act5.act5-v31 .act5-three-stage-v31 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 30px;
+}
+
+#act5.act5-v31 .act5-three-stage-v31 > div {
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+#act5.act5-v31 .act5-three-stage-v31 span {
+  display: block;
+  margin-bottom: 7px;
+  color: #ff9b5f;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+#act5.act5-v31 .act5-three-stage-v31 strong {
+  display: block;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+#act5.act5-v31 .act5-flow-details-v31,
+#act5.act5-v31 .act5-rule-reference-v31 {
+  margin-top: 16px;
+  border: 1px solid rgba(15, 46, 61, 0.15);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+}
+
+#act5.act5-v31 .act5-flow-details-v31 > summary,
+#act5.act5-v31 .act5-rule-reference-v31 .rule-table-details > summary {
+  min-height: 82px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+#act5.act5-v31 .act5-flow-details-v31 > summary::-webkit-details-marker,
+#act5.act5-v31 .act5-rule-reference-v31 .rule-table-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+#act5.act5-v31 .act5-flow-details-v31 > summary span,
+#act5.act5-v31 .act5-rule-reference-v31 .rule-table-details > summary span {
+  color: #f47a35;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+#act5.act5-v31 .act5-flow-details-v31 > summary strong,
+#act5.act5-v31 .act5-rule-reference-v31 .rule-table-details > summary strong {
+  color: #0f2e3d;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#act5.act5-v31 .act5-flow-details-v31 > summary b {
+  color: #f47a35;
+  font-size: 24px;
+}
+
+#act5.act5-v31 .act5-flow-details-v31[open] > summary b {
+  transform: rotate(45deg);
+}
+
+#act5.act5-v31 .act5-flow-details-v31 > .act5-block {
+  margin: 0;
+  padding: 26px 22px 30px;
+  border-top: 1px solid rgba(15, 46, 61, 0.11);
+}
+
+#act5.act5-v31 .act5-rule-reference-v31 {
+  padding: 0;
+}
+
+#act5.act5-v31 .act5-rule-reference-v31 > .act5-block-head {
+  display: none;
+}
+
+#act5.act5-v31 .act5-rule-reference-v31 .rule-table-details {
+  border: 0;
+  margin: 0;
+  background: transparent;
+}
+
+@media (max-width: 900px) {
+  #act5.act5-v31 .act5-loop-anchor-v31 {
+    grid-template-columns: 1fr;
+  }
+
+  #act5.act5-v31 .act5-loop-anchor-v31 > i {
+    min-width: 0;
+  }
+
+  #act5.act5-v31 .act5-loop-anchor-v31 > i b {
+    transform: rotate(90deg);
+  }
+
+  #act5.act5-v31 .act5-challenge-grid,
+  #act5.act5-v31 .act5-three-stage-v31 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  #act5.act5-v31 .act5-head h2 {
+    font-size: clamp(34px, 10vw, 48px);
+  }
+
+  #act5.act5-v31 .act5-loop-anchor-v31 {
+    padding: 16px;
+    border-radius: 19px;
+  }
+
+  #act5.act5-v31 .act5-loop-anchor-v31 article {
+    min-height: 0;
+    padding: 22px 18px;
+  }
+
+  #act5.act5-v31 .act5-conclusion {
+    padding: 26px 19px;
+    border-radius: 19px;
+  }
+
+  #act5.act5-v31 .act5-flow-details-v31 > summary,
+  #act5.act5-v31 .act5-rule-reference-v31 .rule-table-details > summary {
+    grid-template-columns: 1fr auto;
+    padding: 18px;
+  }
+
+  #act5.act5-v31 .act5-flow-details-v31 > summary span,
+  #act5.act5-v31 .act5-rule-reference-v31 .rule-table-details > summary span {
+    grid-column: 1 / -1;
+  }
+}
