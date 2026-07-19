@@ -25,16 +25,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build v27 website with narrative layer
+      - name: Build v28 website with revised ACT 02
         run: python build/build_v26.py
 
       - name: Verify generated narrative assets
         run: |
           test -f _site/index.html
           test -f _site/narrative-v23.js
-          test -f _site/storyline-v26.css
-          grep -q "narrative-v23.js?v=27" _site/index.html
-          grep -q "storyline-v26.css?v=27" _site/index.html
+          test -f _site/feature-bridge-v24.js
+          test -f _site/feature-bridge-v24.css
+          grep -q "narrative-v23.js?v=28" _site/index.html
+          grep -q "feature-bridge-v24.js?v=28" _site/index.html
+          grep -q "feature-bridge-v24.css?v=28" _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
