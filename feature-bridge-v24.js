@@ -1,149 +1,111 @@
 (() => {
   'use strict';
 
-  const stages = [
-    {
-      number: '01',
-      title: '大量工程圖',
-      description: '收集不同專案、繪圖方式與建築條件。'
-    },
-    {
-      number: '02',
-      title: '已知特徵辨識',
-      description: '統計特徵的出現頻率、通過結果與失效情況。'
-    },
-    {
-      number: '03',
-      title: '未知案例分群',
-      description: '找出無法分類、規則衝突與高失敗區域。'
-    },
-    {
-      number: '04',
-      title: '新增工程特徵',
-      description: '補充定義、必要輸入與對應配置規則。'
-    },
-    {
-      number: '05',
-      title: '全案例回歸',
-      description: '確認新規則沒有讓既有案例的整體結果變差。'
-    }
-  ];
-
-  const compact = (value) => (value || '').replace(/\s+/g, '').trim();
-
-  function findSmallestTextElement(phrase) {
-    const target = compact(phrase);
-    const candidates = [...document.querySelectorAll('body h1, body h2, body h3, body h4, body h5, body strong, body span, body p, body div, body li')]
-      .filter((element) => {
-        if (element.closest('.nv-feature-loop-v24, script, style, template')) return false;
-        const text = compact(element.textContent);
-        return text.includes(target) && text.length <= 180;
-      })
-      .sort((a, b) => compact(a.textContent).length - compact(b.textContent).length);
-
-    return candidates[0] || null;
-  }
-
-  function lowestCommonAncestor(elements) {
-    if (!elements.length) return null;
-    let candidate = elements[0];
-    while (candidate && candidate !== document.body) {
-      if (elements.every((element) => candidate.contains(element))) return candidate;
-      candidate = candidate.parentElement;
-    }
-    return null;
-  }
-
-  function findSingleStageCard(element, bridge) {
-    let candidate = element;
-    while (candidate?.parentElement && candidate.parentElement !== bridge && candidate.parentElement !== document.body) {
-      const parent = candidate.parentElement;
-      const parentText = compact(parent.textContent);
-      const stageCount = stages.filter((stage) => parentText.includes(compact(stage.title))).length;
-      if (stageCount > 1 || parentText.length > 520) break;
-      candidate = parent;
-    }
-    return candidate;
-  }
-
-  function hideLegacyStageFlow(bridge) {
-    const titleElements = stages.map((stage) => findSmallestTextElement(stage.title));
-    const foundElements = titleElements.filter(Boolean);
-    if (foundElements.length < 3) return;
-
-    if (foundElements.length === stages.length) {
-      const common = lowestCommonAncestor(foundElements);
-      if (
-        common &&
-        common !== bridge &&
-        common !== document.body &&
-        !common.querySelector('#feature-bridge-title') &&
-        compact(common.textContent).length < 2600
-      ) {
-        common.dataset.nvFeatureLegacyHidden = 'true';
-        return;
-      }
-    }
-
-    foundElements.forEach((element) => {
-      const card = findSingleStageCard(element, bridge);
-      if (card && card !== bridge && !card.querySelector('#feature-bridge-title')) {
-        card.dataset.nvFeatureLegacyHidden = 'true';
-      }
-    });
-
-    [...bridge.querySelectorAll('*')].forEach((element) => {
-      if (element.closest('.nv-feature-loop-v24, .feature-bridge-flow, script, style, template')) return;
-      const text = (element.textContent || '').trim();
-      if ((text === '→' || text === '↓') && element.children.length === 0) {
-        const bounds = element.getBoundingClientRect();
-        if (bounds.width < 80 && bounds.height < 80) {
-          element.dataset.nvFeatureLegacyHidden = 'true';
-        }
-      }
-    });
-  }
-
-  function buildStageLoop() {
-    const wrapper = document.createElement('div');
-    wrapper.className = 'nv-feature-loop-v24';
-    wrapper.setAttribute('aria-label', '工程特徵建立與驗證流程');
-
-    const cards = stages.map((stage) => `
-      <article class="nv-feature-stage-v24">
-        <span class="nv-feature-stage-v24__number">${stage.number}</span>
-        <h4>${stage.title}</h4>
-        <p>${stage.description}</p>
-      </article>
-    `).join('');
-
-    wrapper.innerHTML = `
-      <div class="nv-feature-loop-v24__header">
-        <h3>工程特徵如何持續擴充</h3>
-        <p>新規則必須經過案例分群與全案例回歸，不能只在單一圖面上成立。</p>
-      </div>
-      <div class="nv-feature-loop-v24__grid">${cards}</div>
+  function createDetails(summaryText, bodyHtml, className = '') {
+    const details = document.createElement('details');
+    details.className = `act2-detail ${className}`.trim();
+    details.innerHTML = `
+      <summary>${summaryText}<span aria-hidden="true">＋</span></summary>
+      <div class="act2-detail__body">${bodyHtml}</div>
     `;
-
-    return wrapper;
+    details.addEventListener('toggle', () => {
+      const icon = details.querySelector('summary span');
+      if (icon) icon.textContent = details.open ? '－' : '＋';
+    });
+    return details;
   }
 
-  function repairFeatureBridge() {
-    const bridge = document.querySelector('.feature-bridge');
+  function rewriteAct2() {
+    const act2 = document.querySelector('#act2');
+    if (!act2 || act2.dataset.act2V28 === 'true') return;
+
+    act2.dataset.act2V28 = 'true';
+    document.getElementById('narrative-act-02')?.remove();
+
+    const head = act2.querySelector('.act-head');
+    if (head) {
+      const eyebrow = head.querySelector('.eyebrow');
+      const title = head.querySelector('h2');
+      const intro = head.querySelector('p');
+
+      if (eyebrow) eyebrow.textContent = 'ACT 02 · 工程特徵與配置規律';
+      if (title) title.innerHTML = '建築外形那麼多變，<br>施工架的問題有沒有規律可循？';
+      if (intro) {
+        intro.textContent = '建築的尺寸、方向與外形各不相同，但施工架實際遇到的配置問題會反覆出現。這一篇的工作，是先把這些重複的情況整理出來，讓後續程式能夠辨識、分類並套用對應規則。';
+      }
+    }
+
+    const contextStrip = act2.querySelector('.context-strip');
+    const contextCards = contextStrip ? [...contextStrip.querySelectorAll('.context-card')] : [];
+    const systemCard = contextCards[0] || null;
+    const basisCard = contextCards[1] || null;
+
+    if (systemCard) {
+      systemCard.classList.add('act2-system-card');
+      const heading = systemCard.querySelector('h3');
+      const paragraph = systemCard.querySelector('p');
+      if (heading) heading.textContent = '本案初步判斷：傳統框式施工架';
+      if (paragraph) {
+        paragraph.textContent = '從目前圖面中的架跨尺寸、主架形式與配置方式初步判斷，本案主要採用傳統框式施工架，並以圖面標示的 183 × 80 cm 作為第一階段分析基準。';
+      }
+    }
+
+    if (basisCard) basisCard.remove();
+    if (contextStrip) contextStrip.classList.add('act2-context-single');
+
+    const caseStack = act2.querySelector('.case-stack');
+    if (caseStack && !act2.querySelector('.act2-case-intro')) {
+      const intro = document.createElement('div');
+      intro.className = 'act2-case-intro';
+      intro.innerHTML = `
+        <span>第一批會改變配置的典型情況</span>
+        <h3>先看這些情況會改變施工架配置的哪一部分</h3>
+        <p>基本架跨建立數量基準；轉角改變架列銜接；短跨、突出物與屋頂條件則改變收尾、路徑或必要輸入。</p>
+      `;
+      caseStack.insertAdjacentElement('beforebegin', intro);
+    }
+
+    const bridge = act2.querySelector('.feature-bridge');
     if (!bridge) return;
 
-    bridge.classList.add('nv-feature-bridge-v24');
-    hideLegacyStageFlow(bridge);
+    const legacyGrowth = bridge.querySelector('.feature-growth-loop');
+    const growthHtml = legacyGrowth
+      ? legacyGrowth.outerHTML
+      : '<p>大量工程圖 → 已知特徵辨識 → 未知案例分群 → 新增工程特徵 → 全案例回歸</p>';
 
-    if (!bridge.querySelector('.nv-feature-loop-v24')) {
-      bridge.appendChild(buildStageLoop());
-    }
+    const basisHtml = basisCard
+      ? basisCard.innerHTML
+      : `
+        <h3>設計與計算依據</h3>
+        <p>架跨模數、離牆距離與安全規範來自法規、CNS、產品型錄與客戶圖面。本案暫以圖面標示的 183 × 80 cm 為基準，實際條件仍須依客戶產品與現場資料確認。</p>
+      `;
+
+    bridge.className = 'feature-bridge act2-ending-v28';
+    bridge.innerHTML = `
+      <div class="act2-ending-v28__summary">
+        <span class="case-kicker">本篇發現</span>
+        <h3>這六種情況只是第一批。</h3>
+        <p>後續還要透過更多工程圖面，確認既有分類是否足夠，並找出尚未被整理的新情況。</p>
+        <div class="act2-mini-flow" aria-label="後續擴張流程">
+          <b>第一批典型情況</b><i>→</i><b>更多案例驗證</b><i>→</i><b>補充新情況</b>
+        </div>
+      </div>
+      <div class="act2-detail-list"></div>
+      <div class="act2-next-question">
+        <span>下一篇問題</span>
+        <strong>工程師看得懂轉角、短跨與雨遮，但 CAD 程式實際看見的是圖層、線段、圖塊、文字與座標。兩者之間要怎麼轉換？</strong>
+      </div>
+    `;
+
+    const detailList = bridge.querySelector('.act2-detail-list');
+    detailList?.appendChild(createDetails('這些尺寸與判斷依據從哪裡來？', basisHtml, 'act2-basis-detail'));
+    detailList?.appendChild(createDetails('後續如何擴張這份典型情況清單？', growthHtml, 'act2-growth-detail'));
   }
 
   function boot() {
-    repairFeatureBridge();
-    window.setTimeout(repairFeatureBridge, 250);
-    window.setTimeout(repairFeatureBridge, 1000);
+    rewriteAct2();
+    window.setTimeout(rewriteAct2, 250);
+    window.setTimeout(rewriteAct2, 1000);
   }
 
   if (document.readyState === 'loading') {
