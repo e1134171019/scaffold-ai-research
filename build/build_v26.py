@@ -34,17 +34,17 @@ SITE_ASSETS = [
 ]
 
 STYLE_MARKUP = (
-    '<link rel="stylesheet" href="./narrative-v23.css?v=27">'
-    '<link rel="stylesheet" href="./storyline-v26.css?v=27">'
-    '<link rel="stylesheet" href="./feature-bridge-v24.css?v=27">'
+    '<link rel="stylesheet" href="./narrative-v23.css?v=28">'
+    '<link rel="stylesheet" href="./storyline-v26.css?v=28">'
+    '<link rel="stylesheet" href="./feature-bridge-v24.css?v=28">'
     '<style>@media (max-width:760px){'
     '.nv-feature-stage-v24:not(:last-child)::after{display:grid}'
     '}</style>'
 )
 
 SCRIPT_MARKUP = (
-    '<script src="./narrative-v23.js?v=27"></script>'
-    '<script src="./feature-bridge-v24.js?v=27"></script>'
+    '<script src="./narrative-v23.js?v=28"></script>'
+    '<script src="./feature-bridge-v24.js?v=28"></script>'
 )
 
 
@@ -54,12 +54,12 @@ def sha256(data: bytes) -> str:
 
 def inject_site_assets(html: str) -> str:
     """Attach the narrative/layout layer to the generated single-page report."""
-    if "narrative-v23.css?v=27" not in html:
+    if "narrative-v23.css?v=28" not in html:
         if "</head>" not in html:
             raise RuntimeError("Generated HTML is missing </head>")
         html = html.replace("</head>", f"{STYLE_MARKUP}</head>", 1)
 
-    if "narrative-v23.js?v=27" not in html:
+    if "narrative-v23.js?v=28" not in html:
         if "</body>" not in html:
             raise RuntimeError("Generated HTML is missing </body>")
         html = html.replace("</body>", f"{SCRIPT_MARKUP}</body>", 1)
