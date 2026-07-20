@@ -32,11 +32,13 @@ jobs:
         run: |
           test -f _site/index.html
           test -f _site/.nojekyll
-          echo "f16b1dc882f3790a729510e56f606254c58e932d1500915ea5ad4b3ccf241af5  _site/index.html" | sha256sum --check --strict
+          echo "75b9c77bb152369a4a98cc7b00b2db558bcb0502638a3bccc103a4ac6504b41e  _site/index.html" | sha256sum --check --strict
           grep -q "Babylon.js網路3D工程檢視器" _site/index.html
           grep -q "ScaffoldLayout" _site/index.html
           grep -q "建築圖自主配置與數量產出" _site/index.html
           grep -q "scheme-candidate-generation" _site/index.html
+          grep -q "act4-opening-v41" _site/index.html
+          grep -q "01～03 先定義問題" _site/index.html
           python - <<'PY'
           from pathlib import Path
 
