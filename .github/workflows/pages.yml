@@ -41,6 +41,10 @@ jobs:
           grep -q "scheme1-update-v42" _site/index.html
           grep -q "EntityInventory" _site/index.html
           grep -q "不以圖層或人工總數作為答案" _site/index.html
+          grep -q "scheme2-update-v43" _site/index.html
+          grep -q "歷史人工圖面是觀察資料" _site/index.html
+          grep -q "CadEntitySnapshot" _site/index.html
+          grep -q "規則回歸" _site/index.html
           python - <<'PY'
           from pathlib import Path
 
@@ -68,6 +72,10 @@ jobs:
           assert html.count('class="act3-v40-module-grid"') == 1
           assert html.count('scheme1-update-v42') >= 2
           assert html.count('EntityInventory') >= 1
+          assert html.count('scheme2-update-v43') >= 2
+          assert html.count('歷史人工圖面是觀察資料') >= 1
+          assert html.count('CadEntitySnapshot') >= 1
+          assert html.count('scheme2-v43-architecture') >= 1
           print("ACT 02 arrangement and ACT 03 structure verified", positions)
           PY
 
@@ -82,4 +90,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
