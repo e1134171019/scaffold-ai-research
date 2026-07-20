@@ -1,0 +1,300 @@
+/* scheme1-update-v42 — separate the user story from the engineering implementation. */
+.scheme1-v42-hero {
+  max-width: 980px;
+}
+
+.scheme1-v42-hero > p {
+  max-width: 900px;
+}
+
+.scheme1-v42-boundary {
+  display: grid;
+  gap: 6px;
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid rgba(41, 79, 63, .18);
+  border-left: 4px solid var(--orange);
+  border-radius: 15px;
+  background: rgba(238, 230, 217, .68);
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.scheme1-v42-boundary strong {
+  color: var(--green);
+}
+
+.scheme1-v42-boundary span {
+  font-size: 13px;
+}
+
+.scheme1-v42-loop {
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.scheme1-v42-result-grid,
+.scheme1-v42-check-grid,
+.scheme1-v42-package-grid,
+.scheme1-v42-mvp {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.scheme1-v42-result-grid article,
+.scheme1-v42-check-grid article,
+.scheme1-v42-package-grid article,
+.scheme1-v42-mvp article {
+  padding: 16px 17px;
+  border: 1px solid rgba(41, 79, 63, .14);
+  border-radius: 15px;
+  background: rgba(255, 253, 248, .86);
+}
+
+.scheme1-v42-result-grid span,
+.scheme1-v42-check-grid b,
+.scheme1-v42-package-grid span,
+.scheme1-v42-mvp span {
+  display: block;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+.scheme1-v42-result-grid strong,
+.scheme1-v42-package-grid strong,
+.scheme1-v42-mvp strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--green);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.scheme1-v42-check-grid span,
+.scheme1-v42-package-grid small,
+.scheme1-v42-mvp small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.scheme1-v42-cross-flow,
+.scheme1-v42-shared-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.15fr);
+  gap: 10px;
+  align-items: stretch;
+  margin-top: 22px;
+}
+
+.scheme1-v42-shared-flow {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+}
+
+.scheme1-v42-cross-flow article,
+.scheme1-v42-shared-flow article {
+  min-height: 128px;
+  padding: 16px;
+  border: 1px solid rgba(41, 79, 63, .14);
+  border-radius: 15px;
+  background: #f7f3eb;
+}
+
+.scheme1-v42-cross-flow article.core {
+  background: #26322c;
+  color: rgba(255, 255, 255, .72);
+}
+
+.scheme1-v42-cross-flow article > span,
+.scheme1-v42-shared-flow article > span {
+  display: block;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+.scheme1-v42-cross-flow strong,
+.scheme1-v42-shared-flow strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--green);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.scheme1-v42-cross-flow .core strong {
+  color: #fff;
+}
+
+.scheme1-v42-cross-flow small,
+.scheme1-v42-shared-flow small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.scheme1-v42-cross-flow .core small {
+  color: rgba(255, 255, 255, .68);
+}
+
+.scheme1-v42-cross-flow > i,
+.scheme1-v42-shared-flow > i {
+  align-self: center;
+  color: var(--orange);
+  font-size: 21px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.scheme1-v42-architecture {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: stretch;
+  margin-top: 22px;
+}
+
+.scheme1-v42-architecture article {
+  min-height: 156px;
+  padding: 15px;
+  border: 1px solid rgba(41, 79, 63, .14);
+  border-radius: 15px;
+  background: #f7f3eb;
+}
+
+.scheme1-v42-architecture article:last-of-type {
+  background: #26322c;
+  color: rgba(255, 255, 255, .72);
+}
+
+.scheme1-v42-architecture article > span {
+  display: block;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.scheme1-v42-architecture strong {
+  display: block;
+  margin-top: 8px;
+  color: var(--green);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.scheme1-v42-architecture article:last-of-type strong {
+  color: #fff;
+}
+
+.scheme1-v42-architecture small {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.scheme1-v42-architecture article:last-of-type small {
+  color: rgba(255, 255, 255, .68);
+}
+
+.scheme1-v42-architecture > i {
+  align-self: center;
+  color: var(--orange);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.scheme1-v42-package-note {
+  display: grid;
+  gap: 6px;
+  margin-top: 18px;
+  padding: 15px 17px;
+  border: 1px solid rgba(41, 79, 63, .14);
+  border-radius: 15px;
+  background: rgba(238, 230, 217, .62);
+}
+
+.scheme1-v42-package-note span {
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+.scheme1-v42-package-note strong {
+  color: var(--green);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.scheme1-v42-package-note small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.scheme1-v42-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+}
+
+@media (max-width: 1050px) {
+  .scheme1-v42-architecture,
+  .scheme1-v42-cross-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .scheme1-v42-architecture > i,
+  .scheme1-v42-cross-flow > i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .scheme1-v42-loop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .scheme1-v42-loop i {
+    display: none;
+  }
+
+  .scheme1-v42-shared-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .scheme1-v42-shared-flow > i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .scheme1-v42-loop,
+  .scheme1-v42-result-grid,
+  .scheme1-v42-check-grid,
+  .scheme1-v42-package-grid,
+  .scheme1-v42-mvp {
+    grid-template-columns: 1fr;
+  }
+
+  .scheme1-v42-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}
+

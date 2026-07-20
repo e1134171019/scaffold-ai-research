@@ -31,6 +31,8 @@ ACT3_HTML = ROOT / "act3-v40.html"
 ACT3_CSS = ROOT / "act3-v40.css"
 ACT4_OPENING_JS = ROOT / "act4-opening-v41.js"
 ACT4_OPENING_CSS = ROOT / "act4-opening-v41.css"
+SCHEME1_UPDATE_JS = ROOT / "scheme1-update-v42.js"
+SCHEME1_UPDATE_CSS = ROOT / "scheme1-update-v42.css"
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
@@ -262,6 +264,29 @@ def inject_act4_opening(old: bytes) -> bytes:
     return html.encode("utf-8")
 
 
+def inject_scheme1_update(old: bytes) -> bytes:
+    """Replace Scheme 1 wording and technical detail after ACT 04 is assembled."""
+    html = old.decode("utf-8")
+    if "scheme1-update-v42" in html:
+        return old
+    if html.count("</head>") != 1 or html.count("</body>") != 1:
+        raise RuntimeError("Generated site head/body boundary is missing or ambiguous")
+
+    css = SCHEME1_UPDATE_CSS.read_text(encoding="utf-8").strip()
+    js = SCHEME1_UPDATE_JS.read_text(encoding="utf-8").strip()
+    html = html.replace(
+        "</head>",
+        f"<style>\n{css}\n</style>\n</head>",
+        1,
+    )
+    html = html.replace(
+        "</body>",
+        f"<script>\n{js}\n</script>\n</body>",
+        1,
+    )
+    return html.encode("utf-8")
+
+
 def main() -> None:
     required = [
         SOURCE,
@@ -274,6 +299,8 @@ def main() -> None:
         ACT3_CSS,
         ACT4_OPENING_JS,
         ACT4_OPENING_CSS,
+        SCHEME1_UPDATE_JS,
+        SCHEME1_UPDATE_CSS,
         *BASE_PARTS,
     ]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
@@ -287,6 +314,7 @@ def main() -> None:
     scheme3 = inject_arrangement_method_story(scheme3)
     scheme3 = rewrite_act3_story(scheme3)
     scheme3 = inject_act4_opening(scheme3)
+    scheme3 = inject_scheme1_update(scheme3)
 
     shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -301,3 +329,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

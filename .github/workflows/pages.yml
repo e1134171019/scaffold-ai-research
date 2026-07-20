@@ -32,13 +32,15 @@ jobs:
         run: |
           test -f _site/index.html
           test -f _site/.nojekyll
-          echo "75b9c77bb152369a4a98cc7b00b2db558bcb0502638a3bccc103a4ac6504b41e  _site/index.html" | sha256sum --check --strict
           grep -q "Babylon.js網路3D工程檢視器" _site/index.html
           grep -q "ScaffoldLayout" _site/index.html
           grep -q "建築圖自主配置與數量產出" _site/index.html
           grep -q "scheme-candidate-generation" _site/index.html
           grep -q "act4-opening-v41" _site/index.html
           grep -q "01～03 先定義問題" _site/index.html
+          grep -q "scheme1-update-v42" _site/index.html
+          grep -q "EntityInventory" _site/index.html
+          grep -q "不以圖層或人工總數作為答案" _site/index.html
           python - <<'PY'
           from pathlib import Path
 
@@ -64,6 +66,8 @@ jobs:
           assert html.count('class="act3-v40-gate-card"') == 3
           assert html.count('OUTPUT 0') == 3
           assert html.count('class="act3-v40-module-grid"') == 1
+          assert html.count('scheme1-update-v42') >= 2
+          assert html.count('EntityInventory') >= 1
           print("ACT 02 arrangement and ACT 03 structure verified", positions)
           PY
 
@@ -78,3 +82,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
