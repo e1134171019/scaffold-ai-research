@@ -29,6 +29,8 @@ ARRANGEMENT_CSS = ROOT / "arrangement-methods-v38.css"
 FEATURE_BRIDGE_CSS = ROOT / "feature-bridge-v39.css"
 ACT3_HTML = ROOT / "act3-v40.html"
 ACT3_CSS = ROOT / "act3-v40.css"
+ACT4_OPENING_JS = ROOT / "act4-opening-v41.js"
+ACT4_OPENING_CSS = ROOT / "act4-opening-v41.css"
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
@@ -238,6 +240,28 @@ def rewrite_act3_story(old: bytes) -> bytes:
     return html.encode("utf-8")
 
 
+def inject_act4_opening(old: bytes) -> bytes:
+    """Put the ACT 01-03 definition and condition diagram before the schemes."""
+    html = old.decode("utf-8")
+    opening_js = ACT4_OPENING_JS.read_text(encoding="utf-8").strip()
+    opening_css = ACT4_OPENING_CSS.read_text(encoding="utf-8").strip()
+    if "act4-opening-v41" in html:
+        return old
+    if html.count("</head>") != 1 or html.count("</body>") != 1:
+        raise RuntimeError("Generated site head/body boundary is missing or ambiguous")
+    html = html.replace(
+        "</head>",
+        f"<style>\n{opening_css}\n</style>\n</head>",
+        1,
+    )
+    html = html.replace(
+        "</body>",
+        f"<script>\n{opening_js}\n</script>\n</body>",
+        1,
+    )
+    return html.encode("utf-8")
+
+
 def main() -> None:
     required = [
         SOURCE,
@@ -248,6 +272,8 @@ def main() -> None:
         FEATURE_BRIDGE_CSS,
         ACT3_HTML,
         ACT3_CSS,
+        ACT4_OPENING_JS,
+        ACT4_OPENING_CSS,
         *BASE_PARTS,
     ]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
@@ -260,6 +286,7 @@ def main() -> None:
     scheme3 = apply_line_delta(scheme2, load_delta([SCHEME3_DELTA]), "Scheme 3")
     scheme3 = inject_arrangement_method_story(scheme3)
     scheme3 = rewrite_act3_story(scheme3)
+    scheme3 = inject_act4_opening(scheme3)
 
     shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,206 @@
+/* ACT 04 opening v41 — establish ACT 01–03 as the problem definition before the three schemes. */
+.act4.act4-opening-v41 .act4-head {
+  max-width: 1080px;
+}
+
+.act4.act4-opening-v41 .act4-head h2 {
+  max-width: 980px;
+  margin-bottom: 20px;
+  text-wrap: balance;
+}
+
+.act4.act4-opening-v41 .act4-narrative {
+  max-width: 960px;
+  margin-top: 22px;
+  padding-left: 20px;
+}
+
+.act4.act4-opening-v41 .act4-narrative p {
+  margin-bottom: 10px;
+  line-height: 1.78;
+}
+
+.act4.act4-opening-v41 .act4-condition-flow-v41 {
+  display: grid;
+  gap: 14px;
+  margin-top: 30px;
+  padding: 22px;
+  border: 1px solid rgba(41, 79, 63, .15);
+  border-radius: 24px;
+  background: rgba(220, 230, 217, .48);
+  box-shadow: 0 16px 36px rgba(41, 79, 63, .06);
+}
+
+.act4-condition-origin-v41,
+.act4-condition-process-v41 {
+  padding: 16px;
+  border: 1px solid rgba(41, 79, 63, .12);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, .9);
+}
+
+.act4-condition-origin-v41 > span,
+.act4-condition-process-v41 > span,
+.act4-condition-contract-v41 > span {
+  display: block;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.act4-condition-inputs-v41 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.act4-condition-inputs-v41 article,
+.act4-condition-steps-v41 article {
+  min-height: 94px;
+  padding: 14px;
+  border: 1px solid rgba(41, 79, 63, .1);
+  border-radius: 14px;
+  background: #f7f3eb;
+}
+
+.act4-condition-inputs-v41 b,
+.act4-condition-steps-v41 b {
+  display: block;
+  color: var(--orange);
+  font-size: 11px;
+  letter-spacing: .1em;
+}
+
+.act4-condition-inputs-v41 strong,
+.act4-condition-steps-v41 strong {
+  display: block;
+  margin-top: 6px;
+  color: var(--green);
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.act4-condition-inputs-v41 small,
+.act4-condition-steps-v41 small {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.act4-condition-arrow-v41 {
+  color: var(--orange);
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1;
+  text-align: center;
+}
+
+.act4-condition-contract-v41 {
+  padding: 18px 20px;
+  border-radius: 17px;
+  background: #26322c;
+  color: rgba(255, 255, 255, .74);
+  text-align: center;
+}
+
+.act4-condition-contract-v41 strong {
+  display: block;
+  margin-top: 8px;
+  color: #fff;
+  font-size: 19px;
+  line-height: 1.45;
+}
+
+.act4-condition-contract-v41 small {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.act4-condition-steps-v41 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.act4-condition-steps-v41 i {
+  color: var(--orange);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.act4-condition-result-v41 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.act4-condition-result-v41 span {
+  padding: 12px 14px;
+  border: 1px dashed rgba(41, 79, 63, .2);
+  border-radius: 13px;
+  background: rgba(255, 253, 248, .64);
+}
+
+.act4-condition-result-v41 b {
+  color: var(--green);
+}
+
+.act4-opening-bridge-v41 {
+  max-width: 920px;
+  margin: 15px 0 0;
+  padding: 14px 17px;
+  border-radius: 14px;
+  background: #26322c;
+  color: rgba(255, 255, 255, .74);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.act4-opening-bridge-v41 strong {
+  color: #f0a16f;
+}
+
+.act4.act4-opening-v41 .scheme-one {
+  margin-top: 66px;
+}
+
+@media (max-width: 900px) {
+  .act4-condition-inputs-v41 {
+    grid-template-columns: 1fr;
+  }
+
+  .act4-condition-steps-v41 {
+    grid-template-columns: 1fr;
+  }
+
+  .act4-condition-steps-v41 i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+}
+
+@media (max-width: 720px) {
+  .act4.act4-opening-v41 .act4-head h2 {
+    font-size: clamp(38px, 11vw, 58px);
+  }
+
+  .act4.act4-opening-v41 .act4-condition-flow-v41 {
+    padding: 14px;
+  }
+
+  .act4-condition-result-v41 {
+    grid-template-columns: 1fr;
+  }
+}
