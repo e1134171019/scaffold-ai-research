@@ -25,17 +25,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build Scheme 2 Babylon.js website
+      - name: Build Scheme 3 autonomous configuration website
         run: python build/build_v26.py
 
       - name: Verify generated standalone site
         run: |
           test -f _site/index.html
           test -f _site/.nojekyll
-          echo "74749e41447ecf27cf1a2ded8cce0f2390047109f9f42026156bef1a5fe5c22f  _site/index.html" | sha256sum --check --strict
+          echo "81363a9824f1c048311d06cfebd745c3d71c3d9cf4c24ff3f2e6685d4730725a  _site/index.html" | sha256sum --check --strict
           grep -q "Babylon.js網路3D工程檢視器" _site/index.html
           grep -q "ScaffoldLayout" _site/index.html
-          grep -q "把歷史建案，轉成AI看得懂、工程人員查得到的系統知識" _site/index.html
+          grep -q "建築圖自主配置與數量產出" _site/index.html
+          grep -q "scheme-candidate-generation" _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
