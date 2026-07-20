@@ -32,11 +32,28 @@ jobs:
         run: |
           test -f _site/index.html
           test -f _site/.nojekyll
-          echo "e69e9b4666588f69cf10cb8524eeef792511dc011e888e572f2fa95493e27772  _site/index.html" | sha256sum --check --strict
+          echo "8d73652a5501bc8a468cbffda22355bcb42a4f0325681f86f67280ba5b3d870c  _site/index.html" | sha256sum --check --strict
           grep -q "Babylon.js網路3D工程檢視器" _site/index.html
           grep -q "ScaffoldLayout" _site/index.html
           grep -q "建築圖自主配置與數量產出" _site/index.html
           grep -q "scheme-candidate-generation" _site/index.html
+          python - <<'PY'
+          from pathlib import Path
+
+          html = Path("_site/index.html").read_text(encoding="utf-8")
+          markers = [
+              "</head>",
+              '<section class="section act2',
+              '<section class="method-bridge"',
+              '<div class="case-stack">',
+              '<section class="section act3',
+          ]
+          positions = [html.index(marker) for marker in markers]
+          assert positions == sorted(positions), positions
+          assert html.count('<section class="method-bridge"') == 1
+          assert html.count('class="method-step"') == 3
+          print("ACT 02 arrangement placement verified", positions)
+          PY
 
       - name: Configure Pages
         uses: actions/configure-pages@v5

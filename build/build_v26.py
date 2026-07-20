@@ -108,11 +108,25 @@ def inject_arrangement_method_story(old: bytes) -> bytes:
     if "</head>" not in html:
         raise RuntimeError("Generated site head is missing")
 
-    html = html.replace("</head>", f"<style>\n{arrangement_css}\n</style>\n</head>", 1)
     insertion_point = act2_start + act2.index(anchor)
     html = html[:insertion_point] + f"{arrangement_html}\n\n" + html[insertion_point:]
-    return html.encode("utf-8")
+    html = html.replace("</head>", f"<style>\n{arrangement_css}\n</style>\n</head>", 1)
 
+    markers = {
+        "head_end": html.find("</head>"),
+        "act2": html.find('<section class="section act2'),
+        "method_bridge": html.find('<section class="method-bridge"'),
+        "case_stack": html.find(anchor),
+        "act3": html.find('<section class="section act3'),
+    }
+    positions = list(markers.values())
+    if any(position < 0 for position in positions) or positions != sorted(positions):
+        raise RuntimeError(f"Arrangement block is outside the ACT 02 boundary: {markers}")
+    if html.count('<section class="method-bridge"') != 1:
+        raise RuntimeError("Arrangement block count is not exactly one")
+    if html.count('class="method-step"') != 3:
+        raise RuntimeError("Arrangement block must contain exactly three method steps")
+    return html.encode("utf-8")
 
 def main() -> None:
     required = [
