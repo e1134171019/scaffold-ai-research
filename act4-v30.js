@@ -4,26 +4,26 @@
   const schemeConfigs = [
     {
       selector: '.scheme-one',
-      description: '由繪圖人員先完成施工架配置與人工數量；外掛再從目前 DWG 獨立重建配置、重新計算並比對，同時定位配置異常與資料缺漏。',
-      promptLabel: '使用者怎麼操作？',
-      prompt: '完成配置與數量 → 按下檢查 → 處理差異或異常 → 重新檢查。',
-      output: '人工數量與程式重算的比對結果、配置異常、資料缺漏，以及可追溯的原圖定位。',
+      description: '繪圖人員先把施工架畫好，也把數量整理好。外掛再讀一次目前的 DWG，自己重新計算，找出兩邊的差異和圖面問題。',
+      promptLabel: '繪圖人員怎麼使用？',
+      prompt: '畫好施工架並整理數量 → 按下檢查 → 查看差異 → 回圖修正 → 再檢查一次。',
+      output: '人工數量、程式重算、兩邊差異、圖面異常、缺少資料，以及對應的圖面位置。',
       trigger: '展開查看：AutoCAD 外掛、共同核心、數量比對與 Demo'
     },
     {
       selector: '.scheme-two',
-      description: '將大量既有 DWG／DXF 轉成可比較的案例資料，用來量化同一套規則核心在哪些情況成立、衝突或失效。',
-      promptLabel: '方案二的問題',
-      prompt: '規則在什麼情況下會失效？',
-      output: '規則覆蓋率、衝突與未知案例、失效邊界，以及版本回歸報告。',
+      description: '把大量既有 DWG／DXF 整理成案例，再用同一套規則核心批次測試，確認哪些情況算得準、哪些情況會衝突或失效。',
+      promptLabel: '方案二要回答什麼？',
+      prompt: '這套規則在哪些圖面能用，遇到什麼情況會失效？',
+      output: '規則覆蓋率、衝突案例、未知案例、失效範圍與版本回歸報告。',
       trigger: '展開查看：批次分析架構、邊界報告與 Demo'
     },
     {
       selector: '.scheme-three',
-      description: '在規則與輸入邊界已驗證後，讓程式依硬性約束產生可比較、可追溯的合法候選配置。',
-      promptLabel: '方案三的問題',
-      prompt: '規則已驗證後，能不能讓程式自己排出合法配置？',
-      output: '合法候選配置、每層數量、未解條件；高度資料足夠時，才進一步輸出完整總量。',
+      description: '等輸入條件和規則邊界確認後，程式才開始依照硬性限制產生可比較的施工架候選配置。',
+      promptLabel: '方案三要回答什麼？',
+      prompt: '規則穩定後，程式能不能排出符合條件的施工架方案？',
+      output: '合法候選配置、每層數量與還沒辦法決定的條件；高度資料足夠時，再輸出完整總量。',
       trigger: '展開查看：約束求解架構、生成流程與 Demo'
     }
   ];
@@ -40,12 +40,12 @@
     const route = head.querySelector('.three-route-line');
 
     if (eyebrow) eyebrow.textContent = 'ACT 04 · 三個發展階段';
-    if (title) title.innerHTML = '同一套工程核心，<br><em>依成熟度走出三個階段。</em>';
+    if (title) title.innerHTML = '同一套工程核心，<br><em>一步一步往後發展。</em>';
 
     if (narrative) {
       narrative.innerHTML = `
-        <p><strong>接上一篇的判斷結果：</strong>這一篇不再重複三道閘門，而是說明同一套工程核心如何逐步落地。</p>
-        <p>方案一先用共同核心複核人工配置與人工數量；方案二再用大量工程圖批次驗證同一核心的適用邊界；方案三只在規則與輸入已驗證後，才增加約束求解並產生候選配置。</p>
+        <p><strong>這三個方案不是三套互不相關的系統。</strong>它們會共用同一套資料模型、規則和數量計算。</p>
+        <p>方案一先處理已經畫好的施工架，重新計算並比對人工數量。方案二再用大量案例測試同一套規則。等規則穩定後，方案三才加入自動排列施工架的求解功能。</p>
       `;
     }
 
@@ -54,11 +54,11 @@
 
     if (route) {
       route.innerHTML = `
-        <div><span>階段一</span><b>先複核人工結果</b><small>人工先畫並填數量，外掛獨立重算、比對、稽核與定位。</small></div>
+        <div><span>階段一</span><b>先檢查人工結果</b><small>人先畫好並整理數量，外掛再重新計算、比對和定位問題。</small></div>
         <i>→</i>
-        <div><span>階段二</span><b>再驗證規則邊界</b><small>大量案例批次執行同一核心，找出成立、衝突、未知與失效範圍。</small></div>
+        <div><span>階段二</span><b>再測試規則能用到哪裡</b><small>用大量案例找出規則有效、衝突、未知和失效的範圍。</small></div>
         <i>→</i>
-        <div><span>階段三</span><b>最後生成候選配置</b><small>只在輸入與規則邊界明確時增加求解器並產生合法方案。</small></div>
+        <div><span>階段三</span><b>最後才讓程式排出候選方案</b><small>只有在輸入和規則都清楚時，才增加求解器產生配置。</small></div>
       `;
     }
   }
@@ -90,7 +90,7 @@
     if (!output) {
       output = document.createElement('div');
       output.className = 'act4-output-v30';
-      output.innerHTML = `<span>這個階段輸出什麼？</span><strong></strong>`;
+      output.innerHTML = `<span>這個階段會得到什麼？</span><strong></strong>`;
       (flow || heading)?.insertAdjacentElement('afterend', output);
     }
     const outputText = output.querySelector('strong');
