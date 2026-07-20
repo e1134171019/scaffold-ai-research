@@ -1,0 +1,367 @@
+/* scheme3-update-v44 — keep the reader story and engineering logic in separate visual blocks. */
+.scheme3-v44-hero {
+  max-width: 1000px;
+}
+
+.scheme3-v44-hero > p {
+  max-width: 900px;
+}
+
+.scheme3-v44-boundary,
+.scheme3-v44-model-note {
+  display: grid;
+  gap: 6px;
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid rgba(41, 79, 63, .18);
+  border-left: 4px solid var(--orange);
+  border-radius: 15px;
+  background: rgba(238, 230, 217, .68);
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.scheme3-v44-boundary strong,
+.scheme3-v44-model-note strong {
+  color: var(--green);
+}
+
+.scheme3-v44-boundary span,
+.scheme3-v44-model-note span {
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .1em;
+}
+
+.scheme3-v44-boundary small,
+.scheme3-v44-model-note p {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.scheme3-v44-main-flow,
+.scheme3-v44-autonomy-flow,
+.scheme3-v44-shared-flow,
+.scheme3-v44-signal-flow,
+.scheme3-v44-pipeline,
+.scheme3-v44-component-flow,
+.scheme3-v44-candidate-flow {
+  display: grid;
+  align-items: stretch;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.scheme3-v44-main-flow {
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+}
+
+.scheme3-v44-main-flow > div,
+.scheme3-v44-autonomy-flow article,
+.scheme3-v44-shared-flow article,
+.scheme3-v44-signal-flow article,
+.scheme3-v44-pipeline article,
+.scheme3-v44-component-flow article,
+.scheme3-v44-candidate-flow article {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid rgba(41, 79, 63, .15);
+  border-radius: 15px;
+  background: #f7f3eb;
+}
+
+.scheme3-v44-main-flow > div {
+  min-height: 92px;
+}
+
+.scheme3-v44-main-flow > div span,
+.scheme3-v44-autonomy-flow span,
+.scheme3-v44-shared-flow span,
+.scheme3-v44-signal-flow span,
+.scheme3-v44-pipeline span,
+.scheme3-v44-component-flow span,
+.scheme3-v44-candidate-flow span,
+.scheme3-v44-gate-grid span,
+.scheme3-v44-autonomy-levels span,
+.scheme3-v44-responsibility-grid span,
+.scheme3-v44-mvp span,
+.scheme3-v44-boundary-grid span {
+  display: block;
+  color: var(--orange);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.scheme3-v44-main-flow > div b,
+.scheme3-v44-autonomy-flow strong,
+.scheme3-v44-shared-flow strong,
+.scheme3-v44-signal-flow strong,
+.scheme3-v44-pipeline strong,
+.scheme3-v44-component-flow strong,
+.scheme3-v44-candidate-flow strong,
+.scheme3-v44-gate-grid strong,
+.scheme3-v44-autonomy-levels strong,
+.scheme3-v44-responsibility-grid strong,
+.scheme3-v44-mvp strong,
+.scheme3-v44-boundary-grid strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--green);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.scheme3-v44-main-flow > div small,
+.scheme3-v44-autonomy-flow small,
+.scheme3-v44-shared-flow small,
+.scheme3-v44-signal-flow small,
+.scheme3-v44-pipeline small,
+.scheme3-v44-component-flow small,
+.scheme3-v44-candidate-flow small,
+.scheme3-v44-gate-grid small,
+.scheme3-v44-autonomy-levels small,
+.scheme3-v44-responsibility-grid small,
+.scheme3-v44-mvp small,
+.scheme3-v44-boundary-grid small {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.scheme3-v44-main-flow > i,
+.scheme3-v44-autonomy-flow > i,
+.scheme3-v44-shared-flow > i,
+.scheme3-v44-signal-flow > i,
+.scheme3-v44-pipeline > i,
+.scheme3-v44-component-flow > i,
+.scheme3-v44-candidate-flow > i {
+  align-self: center;
+  color: var(--orange);
+  font-size: 19px;
+  font-style: normal;
+  font-weight: 900;
+  text-align: center;
+}
+
+.scheme3-v44-autonomy-flow {
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+}
+
+.scheme3-v44-autonomy-flow article,
+.scheme3-v44-shared-flow article,
+.scheme3-v44-pipeline article,
+.scheme3-v44-component-flow article,
+.scheme3-v44-candidate-flow article {
+  min-height: 128px;
+}
+
+.scheme3-v44-shared-flow {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.15fr);
+}
+
+.scheme3-v44-shared-flow article.core,
+.scheme3-v44-signal-flow article.core,
+.scheme3-v44-pipeline article.core,
+.scheme3-v44-component-flow article.core,
+.scheme3-v44-candidate-flow article.core,
+.scheme3-v44-gate-grid article.core,
+.scheme3-v44-autonomy-levels article.core {
+  border-color: #26322c;
+  background: #26322c;
+}
+
+.scheme3-v44-shared-flow article.core strong,
+.scheme3-v44-signal-flow article.core strong,
+.scheme3-v44-pipeline article.core strong,
+.scheme3-v44-component-flow article.core strong,
+.scheme3-v44-candidate-flow article.core strong,
+.scheme3-v44-gate-grid article.core strong,
+.scheme3-v44-autonomy-levels article.core strong {
+  color: #fff;
+}
+
+.scheme3-v44-shared-flow article.core small,
+.scheme3-v44-signal-flow article.core small,
+.scheme3-v44-pipeline article.core small,
+.scheme3-v44-component-flow article.core small,
+.scheme3-v44-candidate-flow article.core small,
+.scheme3-v44-gate-grid article.core small,
+.scheme3-v44-autonomy-levels article.core small {
+  color: rgba(255, 255, 255, .7);
+}
+
+.scheme3-v44-input-grid,
+.scheme3-v44-gate-grid,
+.scheme3-v44-package-grid,
+.scheme3-v44-autonomy-levels,
+.scheme3-v44-responsibility-grid,
+.scheme3-v44-mvp,
+.scheme3-v44-boundary-grid {
+  display: grid;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.scheme3-v44-input-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.scheme3-v44-gate-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.scheme3-v44-input-grid article,
+.scheme3-v44-gate-grid article,
+.scheme3-v44-package-grid article,
+.scheme3-v44-autonomy-levels article,
+.scheme3-v44-responsibility-grid article,
+.scheme3-v44-mvp article,
+.scheme3-v44-boundary-grid article {
+  min-width: 0;
+  min-height: 112px;
+  padding: 15px 16px;
+  border: 1px solid rgba(41, 79, 63, .15);
+  border-radius: 15px;
+  background: rgba(255, 253, 248, .88);
+}
+
+.scheme3-v44-signal-flow {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.2fr);
+}
+
+.scheme3-v44-pipeline,
+.scheme3-v44-component-flow,
+.scheme3-v44-candidate-flow {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.1fr);
+}
+
+.scheme3-v44-component-flow {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.15fr);
+}
+
+.scheme3-v44-candidate-flow {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1.15fr);
+}
+
+.scheme3-v44-package-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.scheme3-v44-table {
+  overflow-x: auto;
+  margin-top: 20px;
+  border: 1px solid rgba(41, 79, 63, .15);
+  border-radius: 15px;
+  background: rgba(255, 253, 248, .88);
+}
+
+.scheme3-v44-table > div {
+  display: grid;
+  grid-template-columns: .8fr 1fr .8fr .8fr .8fr 1.35fr;
+  min-width: 720px;
+  gap: 8px;
+  align-items: center;
+  padding: 11px 13px;
+  border-bottom: 1px solid rgba(41, 79, 63, .12);
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.scheme3-v44-table > div:last-child {
+  border-bottom: 0;
+}
+
+.scheme3-v44-table .head {
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .06em;
+}
+
+.scheme3-v44-table b,
+.scheme3-v44-table strong {
+  color: var(--orange);
+}
+
+.scheme3-v44-autonomy-levels {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.scheme3-v44-responsibility-grid,
+.scheme3-v44-boundary-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.scheme3-v44-mvp {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.scheme3-v44-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.scheme3-v44-footer p {
+  max-width: 720px;
+}
+
+@media (max-width: 1180px) {
+  .scheme3-v44-main-flow,
+  .scheme3-v44-autonomy-flow,
+  .scheme3-v44-signal-flow,
+  .scheme3-v44-pipeline,
+  .scheme3-v44-component-flow,
+  .scheme3-v44-candidate-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .scheme3-v44-main-flow > i,
+  .scheme3-v44-autonomy-flow > i,
+  .scheme3-v44-signal-flow > i,
+  .scheme3-v44-pipeline > i,
+  .scheme3-v44-component-flow > i,
+  .scheme3-v44-candidate-flow > i {
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 980px) {
+  .scheme3-v44-input-grid,
+  .scheme3-v44-gate-grid,
+  .scheme3-v44-package-grid,
+  .scheme3-v44-autonomy-levels,
+  .scheme3-v44-mvp {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .scheme3-v44-shared-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .scheme3-v44-shared-flow > i {
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 680px) {
+  .scheme3-v44-input-grid,
+  .scheme3-v44-gate-grid,
+  .scheme3-v44-package-grid,
+  .scheme3-v44-autonomy-levels,
+  .scheme3-v44-responsibility-grid,
+  .scheme3-v44-mvp,
+  .scheme3-v44-boundary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scheme3-v44-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+}

@@ -45,6 +45,9 @@ jobs:
           grep -q "歷史人工圖面是觀察資料" _site/index.html
           grep -q "CadEntitySnapshot" _site/index.html
           grep -q "規則回歸" _site/index.html
+          grep -q "scheme3-update-v44" _site/index.html
+          grep -q "自主系統不是看到 CAD 就直接下答案" _site/index.html
+          grep -q "CAD圖元 ≠ 工程條件 ≠ 求解變數" _site/index.html
           python - <<'PY'
           from pathlib import Path
 
@@ -76,6 +79,9 @@ jobs:
           assert html.count('歷史人工圖面是觀察資料') >= 1
           assert html.count('CadEntitySnapshot') >= 1
           assert html.count('scheme2-v43-architecture') >= 1
+          assert html.count('scheme3-update-v44') >= 2
+          assert html.count('自主系統不是看到 CAD 就直接下答案。') == 1
+          assert html.count('CAD圖元 ≠ 工程條件 ≠ 求解變數') == 1
           print("ACT 02 arrangement and ACT 03 structure verified", positions)
           PY
 
