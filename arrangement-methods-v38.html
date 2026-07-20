@@ -1,32 +1,52 @@
-<section class="method-bridge" aria-labelledby="arrangementMethodsTitle">
+<section class="method-bridge act2-method-bridge" aria-labelledby="arrangementMethodsTitle">
   <div class="method-bridge-head">
-    <span class="method-bridge-kicker">先決定怎麼搭</span>
-    <h3 id="arrangementMethodsTitle">同一棟建築，不一定只有一種搭法</h3>
-    <p>標準尺寸不是從建築圖裡猜出來的。要先確認本案採用的施工架系統與配置方式，再看建築外形如何影響架列，最後才把已形成的配置轉成報價數量。</p>
+    <span class="method-bridge-kicker">本章先分清資料角色</span>
+    <h3 id="arrangementMethodsTitle">建商給的是建築圖，不是施工架配置圖</h3>
+    <p>建築圖通常不會標出 183 × 80、X 形拉桿或主架關係。這些資料要等搭架法與元件規格確定後，才由系統形成配置與數量。</p>
+  </div>
+
+  <div class="act2-role-grid">
+    <article class="act2-role-card act2-role-input">
+      <span class="act2-role-label">系統輸入</span>
+      <strong>建商建築圖</strong>
+      <p>系統要從圖面找出外牆、開口、陽台、退縮與施工範圍。圖上沒有施工架，不代表這些位置可以直接計數。</p>
+      <div class="act2-role-tags"><span>外牆</span><span>開口</span><span>陽台</span><span>退縮</span></div>
+    </article>
+    <article class="act2-role-card act2-role-evidence">
+      <span class="act2-role-label">案例與驗證</span>
+      <strong>歷史施工架 CAD</strong>
+      <p>這類圖面已經包含繪圖員完成的配置，可用來研究架跨、短跨、主架共用與數量關係，但不是建商圖的固定格式。</p>
+      <div class="act2-role-tags"><span>183 × 80</span><span>X 記號</span><span>主架關係</span><span>人工配置</span></div>
+    </article>
+  </div>
+
+  <div class="act2-method-heading">
+    <span class="method-bridge-kicker">決定後才開始配置</span>
+    <h4>先確認搭架法與元件規格，再談數量</h4>
   </div>
 
   <div class="method-bridge-flow" aria-label="搭架方法到數量的理解流程">
     <article class="method-step">
       <span class="method-step-number">01</span>
       <div>
-        <strong>先看用什麼架</strong>
-        <p>本案採用框式、系統式或其他指定系統？產品型號與標準尺寸，先由工程條件和元件資料確定。</p>
+        <strong>確認搭架法</strong>
+        <p>本案採用傳統框式、系統式或其他指定搭法？這個選擇由專案條件決定，不從一條線直接猜出來。</p>
       </div>
     </article>
     <div class="method-flow-arrow" aria-hidden="true">→</div>
     <article class="method-step">
       <span class="method-step-number">02</span>
       <div>
-        <strong>再看沿哪裡搭</strong>
-        <p>外牆可以連續搭設，也可能因轉角、退縮、開口或施工範圍而分段、繞行或中斷。</p>
+        <strong>套用元件庫</strong>
+        <p>由客戶／專案 Profile 提供架跨、架深、樓層模數與計數項目，建立本案可以使用的元件範圍。</p>
       </div>
     </article>
     <div class="method-flow-arrow" aria-hidden="true">→</div>
     <article class="method-step">
       <span class="method-step-number">03</span>
       <div>
-        <strong>最後處理特殊位置</strong>
-        <p>不足一個標準架跨時，才判斷短跨、移動起點、重新分段或特殊處理，數量也因此改變。</p>
+        <strong>依建築條件配置</strong>
+        <p>再處理外牆路徑、轉角、開口、中斷與不足尺寸，最後才得到可計算的架列。</p>
       </div>
     </article>
   </div>
@@ -38,10 +58,23 @@
     </div>
   </div>
 
+  <details class="act2-engineering-detail">
+    <summary><span>展開查看</span><strong>這一章的工程邏輯</strong></summary>
+    <div class="act2-logic-flow" aria-label="ACT 02工程邏輯">
+      <div><span>01</span><b>讀取建築圖</b><small>取得線、圖層、圖塊、文字與座標</small></div>
+      <i>→</i>
+      <div><span>02</span><b>建立建築條件</b><small>找出外牆、開口、陽台、退縮與中斷</small></div>
+      <i>→</i>
+      <div><span>03</span><b>套用搭架法與規格</b><small>確認本案可使用的架跨與元件</small></div>
+      <i>→</i>
+      <div><span>04</span><b>形成配置再計數</b><small>主架、架跨、工作板與其他項目</small></div>
+    </div>
+    <p class="act2-engineering-note">這裡先定義工程流程。底層工具只協助讀圖、整理幾何與搜尋關係，不會自行判定哪條線代表施工架。</p>
+  </details>
+
   <div class="method-bridge-case">
     <span>回到本案</span>
-    <strong>本案先以傳統框式施工架作為理解案例</strong>
-    <p>因此後面才會看到 183 × 80、基本架跨、主架共用與不足尺寸的處理。這是本案的配置背景，不是所有建築案的唯一搭法。</p>
+    <strong>183 × 80、X 記號與主架關係，是歷史案例的配置證據</strong>
+    <p>本案先用已完成的傳統框式施工架圖說明人工如何排列與計數；真正接收建商建築圖後，系統必須從建築條件重新建立配置。</p>
   </div>
 </section>
-
