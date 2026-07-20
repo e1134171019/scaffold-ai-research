@@ -1,0 +1,398 @@
+/* ACT 03 v40 — separate input roles, decision gates, output levels, and tools. */
+.act3-v40 {
+  position: relative;
+  overflow: hidden;
+  background: #e9e0d3;
+  padding: 104px 24px 120px;
+}
+
+.act3-v40-wrap {
+  position: relative;
+  z-index: 1;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.act3-v40-head {
+  max-width: 960px;
+}
+
+.act3-v40-head h2 {
+  margin: 20px 0 14px;
+  color: var(--green);
+  font-size: clamp(42px, 5vw, 70px);
+  line-height: 1.08;
+  letter-spacing: -.045em;
+}
+
+.act3-v40-head p,
+.act3-v40-part-head p,
+.act3-v40-decision-head p {
+  max-width: 820px;
+  margin: 0;
+  color: #4f5851;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.act3-v40-inputs,
+.act3-v40-gates,
+.act3-v40-decision,
+.act3-v40-roles {
+  margin-top: 58px;
+}
+
+.act3-v40-part-head {
+  max-width: 900px;
+  margin-bottom: 22px;
+}
+
+.act3-v40-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--orange);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
+
+.act3-v40-part-head h3,
+.act3-v40-decision-head h3 {
+  margin: 0 0 9px;
+  color: var(--green);
+  font-size: clamp(28px, 3.4vw, 46px);
+  line-height: 1.18;
+  letter-spacing: -.03em;
+}
+
+.act3-v40-input-grid,
+.act3-v40-gate-grid,
+.act3-v40-output-grid,
+.act3-v40-role-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.act3-v40-input-card,
+.act3-v40-gate-card,
+.act3-v40-role-grid article,
+.act3-v40-output-grid article {
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid rgba(41, 79, 63, .15);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, .8);
+}
+
+.act3-v40-input-card > span,
+.act3-v40-gate-card > span,
+.act3-v40-output-grid article > span,
+.act3-v40-role-grid article > span {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .08em;
+}
+
+.act3-v40-input-card strong,
+.act3-v40-gate-card h4,
+.act3-v40-output-grid article strong,
+.act3-v40-role-grid article strong {
+  display: block;
+  margin: 9px 0 8px;
+  color: var(--green);
+  font-size: 20px;
+  line-height: 1.35;
+}
+
+.act3-v40-input-card p,
+.act3-v40-gate-card p,
+.act3-v40-output-grid article p,
+.act3-v40-role-grid article p {
+  margin: 0;
+  color: #58625a;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.act3-v40-input-card small {
+  display: block;
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(41, 79, 63, .12);
+  color: #6b756d;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.act3-v40-main-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  margin-top: 34px;
+  padding: 18px;
+  border-radius: 18px;
+  background: #26322c;
+}
+
+.act3-v40-main-flow > div {
+  min-width: 0;
+  padding: 13px 10px;
+  border: 1px solid rgba(255, 255, 255, .13);
+  border-radius: 13px;
+  text-align: center;
+}
+
+.act3-v40-main-flow span,
+.act3-v40-main-flow b,
+.act3-v40-main-flow small {
+  display: block;
+}
+
+.act3-v40-main-flow span {
+  color: #f0a16f;
+  font-size: 10px;
+  font-weight: 900;
+}
+
+.act3-v40-main-flow b {
+  margin-top: 5px;
+  color: #fff7ed;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.act3-v40-main-flow small {
+  margin-top: 5px;
+  color: rgba(255, 255, 255, .68);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.act3-v40-main-flow > i,
+.act3-v40-mini-loop i {
+  color: #f0a16f;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.act3-v40-checks,
+.act3-v40-mini-loop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.act3-v40-checks b,
+.act3-v40-mini-loop b {
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: rgba(169, 188, 168, .28);
+  color: var(--green);
+  font-size: 11px;
+}
+
+.act3-v40-example {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 11px 12px;
+  border-radius: 13px;
+  background: rgba(244, 122, 53, .08);
+  color: var(--green);
+  font-size: 12px;
+}
+
+.act3-v40-example i {
+  color: var(--orange);
+  font-style: normal;
+  font-weight: 900;
+}
+
+.act3-v40-example strong {
+  font-size: 12px;
+}
+
+.act3-v40-decision {
+  padding: 28px;
+  border-radius: 22px;
+  background: #26322c;
+}
+
+.act3-v40-decision-head h3,
+.act3-v40-decision-head p {
+  color: #fff7ed;
+}
+
+.act3-v40-decision-head p {
+  color: rgba(255, 255, 255, .72);
+}
+
+.act3-v40-output-grid {
+  margin-top: 24px;
+}
+
+.act3-v40-output-grid article {
+  background: rgba(255, 253, 248, .08);
+  border-color: rgba(255, 255, 255, .14);
+}
+
+.act3-v40-output-grid article > span {
+  color: #f0a16f;
+}
+
+.act3-v40-output-grid article strong {
+  color: #ffd0ad;
+}
+
+.act3-v40-output-grid article p {
+  color: rgba(255, 255, 255, .72);
+}
+
+.act3-v40-details {
+  margin-top: 30px;
+  border: 1px solid rgba(41, 79, 63, .16);
+  border-radius: 18px;
+  background: rgba(255, 253, 248, .7);
+  overflow: hidden;
+}
+
+.act3-v40-details summary {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px 20px;
+  color: var(--green);
+  cursor: pointer;
+  list-style: none;
+}
+
+.act3-v40-details summary::-webkit-details-marker { display: none; }
+.act3-v40-details summary span { color: var(--orange); font-size: 12px; font-weight: 900; }
+.act3-v40-details summary strong { font-size: 15px; }
+
+.act3-v40-module-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0 20px 20px;
+}
+
+.act3-v40-module-grid article {
+  padding: 15px;
+  border: 1px solid rgba(41, 79, 63, .12);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, .5);
+}
+
+.act3-v40-module-grid span {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.act3-v40-module-grid b {
+  display: block;
+  margin-top: 7px;
+  color: var(--green);
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.act3-v40-module-grid p {
+  margin: 7px 0 0;
+  color: #657067;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.act3-v40-tool-note {
+  margin: 0 20px 20px;
+  padding: 15px 16px;
+  border-left: 3px solid var(--orange);
+  border-radius: 0 13px 13px 0;
+  background: rgba(244, 122, 53, .07);
+}
+
+.act3-v40-tool-note span {
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.act3-v40-tool-note p {
+  margin: 7px 0 0;
+  color: #58625a;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.act3-v40-next {
+  margin-top: 34px;
+  text-align: right;
+}
+
+.act3-v40-next a {
+  color: var(--green);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+@media (max-width: 980px) {
+  .act3-v40-input-grid,
+  .act3-v40-gate-grid,
+  .act3-v40-output-grid,
+  .act3-v40-role-grid,
+  .act3-v40-module-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .act3-v40-main-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .act3-v40-main-flow > i {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+}
+
+@media (max-width: 620px) {
+  .act3-v40 {
+    padding: 76px 18px 86px;
+  }
+
+  .act3-v40-input-grid,
+  .act3-v40-gate-grid,
+  .act3-v40-output-grid,
+  .act3-v40-role-grid,
+  .act3-v40-module-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .act3-v40-decision {
+    padding: 20px;
+  }
+
+  .act3-v40-details summary {
+    display: block;
+  }
+
+  .act3-v40-details summary strong {
+    display: block;
+    margin-top: 7px;
+  }
+
+  .act3-v40-module-grid {
+    padding: 0 16px 16px;
+  }
+
+  .act3-v40-tool-note {
+    margin: 0 16px 16px;
+  }
+}

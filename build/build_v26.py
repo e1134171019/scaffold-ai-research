@@ -27,6 +27,8 @@ SCHEME3_DELTA = BUILD_DIR / "scheme3-autonomous-v37.delta"
 ARRANGEMENT_HTML = ROOT / "arrangement-methods-v38.html"
 ARRANGEMENT_CSS = ROOT / "arrangement-methods-v38.css"
 FEATURE_BRIDGE_CSS = ROOT / "feature-bridge-v39.css"
+ACT3_HTML = ROOT / "act3-v40.html"
+ACT3_CSS = ROOT / "act3-v40.css"
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
@@ -197,6 +199,45 @@ def inject_arrangement_method_story(old: bytes) -> bytes:
     return html.encode("utf-8")
 
 
+def rewrite_act3_story(old: bytes) -> bytes:
+    """Replace ACT 03 with the separated input, gate, output, and tool story."""
+    html = old.decode("utf-8")
+    if 'class="act3-v40"' in html:
+        return old
+
+    act3_html = ACT3_HTML.read_text(encoding="utf-8").strip()
+    act3_css = ACT3_CSS.read_text(encoding="utf-8").strip()
+    act3_start = html.find('<section class="section act3')
+    act4_start = html.find('<section class="section act4', act3_start + 1)
+    if act3_start < 0 or act4_start < 0 or act4_start <= act3_start:
+        raise RuntimeError("ACT 03 boundaries are missing or ambiguous")
+    if "</head>" not in html:
+        raise RuntimeError("Generated site head is missing")
+
+    html = html[:act3_start] + act3_html + "\n" + html[act4_start:]
+    html = html.replace("</head>", f"<style>\n{act3_css}\n</style>\n</head>", 1)
+
+    markers = {
+        "act2": html.find('<section class="section act2'),
+        "act3": html.find('<section class="section act3 act3-v40'),
+        "act4": html.find('<section class="section act4'),
+    }
+    positions = list(markers.values())
+    if any(position < 0 for position in positions) or positions != sorted(positions):
+        raise RuntimeError(f"ACT 03 replacement is outside the chapter boundary: {markers}")
+    if html.count('<section class="section act3-v40') != 1:
+        raise RuntimeError("ACT 03 replacement count is not exactly one")
+    if html.count('class="act3-v40-input-card"') != 3:
+        raise RuntimeError("ACT 03 input roles are incomplete")
+    if html.count('class="act3-v40-gate-card"') != 3:
+        raise RuntimeError("ACT 03 gates are incomplete")
+    if html.count('OUTPUT 0') != 3:
+        raise RuntimeError("ACT 03 output levels are incomplete")
+    if html.count('class="act3-v40-module-grid"') != 1:
+        raise RuntimeError("ACT 03 engineering detail block is missing")
+    return html.encode("utf-8")
+
+
 def main() -> None:
     required = [
         SOURCE,
@@ -205,6 +246,8 @@ def main() -> None:
         ARRANGEMENT_HTML,
         ARRANGEMENT_CSS,
         FEATURE_BRIDGE_CSS,
+        ACT3_HTML,
+        ACT3_CSS,
         *BASE_PARTS,
     ]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
@@ -216,6 +259,7 @@ def main() -> None:
     scheme2 = apply_line_delta(v26, load_delta([SCHEME2_DELTA]), "Scheme 2")
     scheme3 = apply_line_delta(scheme2, load_delta([SCHEME3_DELTA]), "Scheme 3")
     scheme3 = inject_arrangement_method_story(scheme3)
+    scheme3 = rewrite_act3_story(scheme3)
 
     shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

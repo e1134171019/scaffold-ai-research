@@ -32,7 +32,7 @@ jobs:
         run: |
           test -f _site/index.html
           test -f _site/.nojekyll
-          echo "475e6123462d14fe434552c3b409dd47265b4ff079082188800442bf6b3ce242  _site/index.html" | sha256sum --check --strict
+          echo "f16b1dc882f3790a729510e56f606254c58e932d1500915ea5ad4b3ccf241af5  _site/index.html" | sha256sum --check --strict
           grep -q "Babylon.js網路3D工程檢視器" _site/index.html
           grep -q "ScaffoldLayout" _site/index.html
           grep -q "建築圖自主配置與數量產出" _site/index.html
@@ -57,7 +57,12 @@ jobs:
           assert html.count('class="act2-role-card') == 2
           assert html.count('class="act2-engineering-detail"') == 1
           assert html.count('ACT 02 v39') == 1
-          print("ACT 02 arrangement placement verified", positions)
+          assert html.count('class="section act3 act3-v40"') == 1
+          assert html.count('class="act3-v40-input-card"') == 3
+          assert html.count('class="act3-v40-gate-card"') == 3
+          assert html.count('OUTPUT 0') == 3
+          assert html.count('class="act3-v40-module-grid"') == 1
+          print("ACT 02 arrangement and ACT 03 structure verified", positions)
           PY
 
       - name: Configure Pages
