@@ -25,7 +25,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build v33 website with integrated Scheme 1
+      - name: Build v34 website with Scheme 1 quantity reconciliation
         run: python build/build_v26.py
 
       - name: Verify generated narrative assets
@@ -41,11 +41,11 @@ jobs:
           test -f _site/act5-v31.css
           test -f _site/scheme1-integrated-v33.js
           test -f _site/scheme1-integrated-v33.css
-          grep -q "narrative-v23.js?v=33" _site/index.html
-          grep -q "act4-v30.js?v=33" _site/index.html
-          grep -q "act5-v31.js?v=33" _site/index.html
-          grep -q "scheme1-integrated-v33.js?v=33" _site/index.html
-          grep -q "scheme1-integrated-v33.css?v=33" _site/index.html
+          grep -q "narrative-v23.js?v=34" _site/index.html
+          grep -q "act4-v30.js?v=34" _site/index.html
+          grep -q "act5-v31.js?v=34" _site/index.html
+          grep -q "scheme1-integrated-v33.js?v=34" _site/index.html
+          grep -q "scheme1-integrated-v33.css?v=34" _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
