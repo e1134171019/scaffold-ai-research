@@ -26,6 +26,7 @@ SCHEME2_DELTA = BUILD_DIR / "scheme2-babylon-v36.delta"
 SCHEME3_DELTA = BUILD_DIR / "scheme3-autonomous-v37.delta"
 ARRANGEMENT_HTML = ROOT / "arrangement-methods-v38.html"
 ARRANGEMENT_CSS = ROOT / "arrangement-methods-v38.css"
+FEATURE_BRIDGE_CSS = ROOT / "feature-bridge-v39.css"
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
@@ -97,6 +98,7 @@ def inject_arrangement_method_story(old: bytes) -> bytes:
 
     arrangement_html = ARRANGEMENT_HTML.read_text(encoding="utf-8").strip()
     arrangement_css = ARRANGEMENT_CSS.read_text(encoding="utf-8").strip()
+    feature_bridge_css = FEATURE_BRIDGE_CSS.read_text(encoding="utf-8").strip()
     act2_start = html.find('<section class="section act2')
     act3_start = html.find('<section class="section act3', act2_start + 1)
     if act2_start < 0 or act3_start < 0 or act3_start <= act2_start:
@@ -110,7 +112,11 @@ def inject_arrangement_method_story(old: bytes) -> bytes:
 
     insertion_point = act2_start + act2.index(anchor)
     html = html[:insertion_point] + f"{arrangement_html}\n\n" + html[insertion_point:]
-    html = html.replace("</head>", f"<style>\n{arrangement_css}\n</style>\n</head>", 1)
+    html = html.replace(
+        "</head>",
+        f"<style>\n{arrangement_css}\n\n{feature_bridge_css}\n</style>\n</head>",
+        1,
+    )
 
     replacements = [
         (
@@ -198,6 +204,7 @@ def main() -> None:
         SCHEME3_DELTA,
         ARRANGEMENT_HTML,
         ARRANGEMENT_CSS,
+        FEATURE_BRIDGE_CSS,
         *BASE_PARTS,
     ]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]

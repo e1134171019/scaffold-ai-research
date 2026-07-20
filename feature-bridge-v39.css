@@ -1,0 +1,51 @@
+/* ACT 02 v39 — give the feature bridge enough width to remain readable. */
+.feature-bridge {
+  grid-template-columns: 1fr;
+  gap: 30px;
+  align-items: start;
+}
+
+.feature-bridge-copy {
+  max-width: 960px;
+}
+
+.feature-growth-loop {
+  width: 100%;
+  margin-top: 22px;
+}
+
+.feature-growth-loop > div {
+  min-height: 0;
+  padding: 16px 14px;
+}
+
+.feature-growth-loop b {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.feature-growth-loop small {
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.feature-flow {
+  width: min(900px, 100%);
+  margin: 0 auto;
+}
+
+@media (max-width: 980px) {
+  .feature-growth-loop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .feature-growth-loop > i {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .feature-growth-loop {
+    grid-template-columns: 1fr;
+  }
+}

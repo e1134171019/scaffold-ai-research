@@ -32,7 +32,7 @@ jobs:
         run: |
           test -f _site/index.html
           test -f _site/.nojekyll
-          echo "4503ea1be9adb52d91b7acc1ddd5a911b1da466f48b27be8e9d1774ee23ab296  _site/index.html" | sha256sum --check --strict
+          echo "475e6123462d14fe434552c3b409dd47265b4ff079082188800442bf6b3ce242  _site/index.html" | sha256sum --check --strict
           grep -q "Babylon.js網路3D工程檢視器" _site/index.html
           grep -q "ScaffoldLayout" _site/index.html
           grep -q "建築圖自主配置與數量產出" _site/index.html
@@ -56,6 +56,7 @@ jobs:
           assert html.count('本案案例：已完成的傳統框式施工架配置') == 1
           assert html.count('class="act2-role-card') == 2
           assert html.count('class="act2-engineering-detail"') == 1
+          assert html.count('ACT 02 v39') == 1
           print("ACT 02 arrangement placement verified", positions)
           PY
 
