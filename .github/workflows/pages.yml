@@ -25,27 +25,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build v35 website with natural Scheme 1 narration
+      - name: Build Scheme 2 Babylon.js website
         run: python build/build_v26.py
 
-      - name: Verify generated narrative assets
+      - name: Verify generated standalone site
         run: |
           test -f _site/index.html
-          test -f _site/narrative-v23.js
-          test -f _site/feature-bridge-v24.js
-          test -f _site/act3-v29.js
-          test -f _site/act3-v29.css
-          test -f _site/act4-v30.js
-          test -f _site/act4-v30.css
-          test -f _site/act5-v31.js
-          test -f _site/act5-v31.css
-          test -f _site/scheme1-integrated-v33.js
-          test -f _site/scheme1-integrated-v33.css
-          grep -q "narrative-v23.js?v=35" _site/index.html
-          grep -q "act4-v30.js?v=35" _site/index.html
-          grep -q "act5-v31.js?v=35" _site/index.html
-          grep -q "scheme1-integrated-v33.js?v=35" _site/index.html
-          grep -q "scheme1-integrated-v33.css?v=35" _site/index.html
+          test -f _site/.nojekyll
+          echo "74749e41447ecf27cf1a2ded8cce0f2390047109f9f42026156bef1a5fe5c22f  _site/index.html" | sha256sum --check --strict
+          grep -q "Babylon.js網路3D工程檢視器" _site/index.html
+          grep -q "ScaffoldLayout" _site/index.html
+          grep -q "把歷史建案，轉成AI看得懂、工程人員查得到的系統知識" _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
