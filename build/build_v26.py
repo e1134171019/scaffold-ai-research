@@ -42,25 +42,25 @@ SITE_ASSETS = [
 ]
 
 STYLE_MARKUP = (
-    '<link rel="stylesheet" href="./narrative-v23.css?v=34">'
-    '<link rel="stylesheet" href="./storyline-v26.css?v=34">'
-    '<link rel="stylesheet" href="./feature-bridge-v24.css?v=34">'
-    '<link rel="stylesheet" href="./act3-v29.css?v=34">'
-    '<link rel="stylesheet" href="./act4-v30.css?v=34">'
-    '<link rel="stylesheet" href="./act5-v31.css?v=34">'
-    '<link rel="stylesheet" href="./scheme1-integrated-v33.css?v=34">'
+    '<link rel="stylesheet" href="./narrative-v23.css?v=35">'
+    '<link rel="stylesheet" href="./storyline-v26.css?v=35">'
+    '<link rel="stylesheet" href="./feature-bridge-v24.css?v=35">'
+    '<link rel="stylesheet" href="./act3-v29.css?v=35">'
+    '<link rel="stylesheet" href="./act4-v30.css?v=35">'
+    '<link rel="stylesheet" href="./act5-v31.css?v=35">'
+    '<link rel="stylesheet" href="./scheme1-integrated-v33.css?v=35">'
     '<style>@media (max-width:760px){'
     '.nv-feature-stage-v24:not(:last-child)::after{display:grid}'
     '}</style>'
 )
 
 SCRIPT_MARKUP = (
-    '<script src="./narrative-v23.js?v=34"></script>'
-    '<script src="./feature-bridge-v24.js?v=34"></script>'
-    '<script src="./act3-v29.js?v=34"></script>'
-    '<script src="./act4-v30.js?v=34"></script>'
-    '<script src="./act5-v31.js?v=34"></script>'
-    '<script src="./scheme1-integrated-v33.js?v=34"></script>'
+    '<script src="./narrative-v23.js?v=35"></script>'
+    '<script src="./feature-bridge-v24.js?v=35"></script>'
+    '<script src="./act3-v29.js?v=35"></script>'
+    '<script src="./act4-v30.js?v=35"></script>'
+    '<script src="./act5-v31.js?v=35"></script>'
+    '<script src="./scheme1-integrated-v33.js?v=35"></script>'
 )
 
 
@@ -70,12 +70,12 @@ def sha256(data: bytes) -> str:
 
 def inject_site_assets(html: str) -> str:
     """Attach the narrative/layout layer to the generated single-page report."""
-    if "narrative-v23.css?v=34" not in html:
+    if "narrative-v23.css?v=35" not in html:
         if "</head>" not in html:
             raise RuntimeError("Generated HTML is missing </head>")
         html = html.replace("</head>", f"{STYLE_MARKUP}</head>", 1)
 
-    if "narrative-v23.js?v=34" not in html:
+    if "narrative-v23.js?v=35" not in html:
         if "</body>" not in html:
             raise RuntimeError("Generated HTML is missing </body>")
         html = html.replace("</body>", f"{SCRIPT_MARKUP}</body>", 1)
