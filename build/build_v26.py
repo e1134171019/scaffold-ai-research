@@ -23,6 +23,7 @@ BASE_PART_NAMES = [
 ]
 BASE_PARTS = [BUILD_DIR / name for name in BASE_PART_NAMES]
 SCHEME2_DELTA = BUILD_DIR / "scheme2-babylon-v36.delta"
+SCHEME3_DELTA = BUILD_DIR / "scheme3-autonomous-v37.delta"
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
@@ -57,15 +58,15 @@ def apply_byte_delta(old: bytes, delta: dict) -> bytes:
     return final
 
 
-def apply_line_delta(old: bytes, delta: dict) -> bytes:
+def apply_line_delta(old: bytes, delta: dict, label: str) -> bytes:
     if delta.get("format") != "line-copy-insert-v1":
-        raise RuntimeError("Unsupported Scheme 2 delta format")
+        raise RuntimeError(f"Unsupported {label} delta format")
     if sha256(old) != delta["old_sha256"]:
-        raise RuntimeError("Generated v26 does not match the Scheme 2 delta base")
+        raise RuntimeError(f"Input does not match the {label} delta base")
 
     old_lines = old.splitlines(keepends=True)
     if len(old_lines) != delta["old_line_count"]:
-        raise RuntimeError("Generated v26 line count does not match the Scheme 2 delta")
+        raise RuntimeError(f"Input line count does not match the {label} delta")
 
     result = bytearray()
     for operation in delta["ops"]:
@@ -76,34 +77,35 @@ def apply_line_delta(old: bytes, delta: dict) -> bytes:
         elif kind == "i":
             result.extend(base64.b64decode(operation[1]))
         else:
-            raise RuntimeError(f"Unknown line-delta operation: {kind}")
+            raise RuntimeError(f"Unknown {label} line-delta operation: {kind}")
 
     final = bytes(result)
     if len(final.splitlines(keepends=True)) != delta["new_line_count"]:
-        raise RuntimeError("Generated Scheme 2 line count verification failed")
+        raise RuntimeError(f"Generated {label} line count verification failed")
     if sha256(final) != delta["new_sha256"]:
-        raise RuntimeError("Generated Scheme 2 checksum verification failed")
+        raise RuntimeError(f"Generated {label} checksum verification failed")
     return final
 
 
 def main() -> None:
-    required = [SOURCE, SCHEME2_DELTA, *BASE_PARTS]
+    required = [SOURCE, SCHEME2_DELTA, SCHEME3_DELTA, *BASE_PARTS]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError(f"Missing build input: {', '.join(missing)}")
 
     v22 = SOURCE.read_bytes()
     v26 = apply_byte_delta(v22, load_delta(BASE_PARTS))
-    scheme2 = apply_line_delta(v26, load_delta([SCHEME2_DELTA]))
+    scheme2 = apply_line_delta(v26, load_delta([SCHEME2_DELTA]), "Scheme 2")
+    scheme3 = apply_line_delta(scheme2, load_delta([SCHEME3_DELTA]), "Scheme 3")
 
     shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    OUTPUT.write_bytes(scheme2)
+    OUTPUT.write_bytes(scheme3)
     (OUTPUT_DIR / ".nojekyll").write_text("", encoding="utf-8")
 
     print(
         f"Generated {OUTPUT} ({OUTPUT.stat().st_size:,} bytes, "
-        f"sha256={sha256(scheme2)})"
+        f"sha256={sha256(scheme3)})"
     )
 
 
