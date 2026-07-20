@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 0.3 seconds
+Output:
 from __future__ import annotations
 
 import base64
@@ -24,6 +27,8 @@ BASE_PART_NAMES = [
 BASE_PARTS = [BUILD_DIR / name for name in BASE_PART_NAMES]
 SCHEME2_DELTA = BUILD_DIR / "scheme2-babylon-v36.delta"
 SCHEME3_DELTA = BUILD_DIR / "scheme3-autonomous-v37.delta"
+ARRANGEMENT_HTML = ROOT / "arrangement-methods-v38.html"
+ARRANGEMENT_CSS = ROOT / "arrangement-methods-v38.css"
 OUTPUT_DIR = ROOT / "_site"
 OUTPUT = OUTPUT_DIR / "index.html"
 
@@ -87,8 +92,40 @@ def apply_line_delta(old: bytes, delta: dict, label: str) -> bytes:
     return final
 
 
+def inject_arrangement_method_story(old: bytes) -> bytes:
+    """Add the ACT 02 narrative bridge after the case context and before details."""
+    html = old.decode("utf-8")
+    if 'id="arrangementMethodsTitle"' in html:
+        return old
+
+    arrangement_html = ARRANGEMENT_HTML.read_text(encoding="utf-8").strip()
+    arrangement_css = ARRANGEMENT_CSS.read_text(encoding="utf-8").strip()
+    act2_start = html.find('<section class="section act2')
+    act3_start = html.find('<section class="section act3', act2_start + 1)
+    if act2_start < 0 or act3_start < 0 or act3_start <= act2_start:
+        raise RuntimeError("ACT 02 boundaries are missing or ambiguous")
+    act2 = html[act2_start:act3_start]
+    anchor = '<div class="case-stack">'
+    if act2.count(anchor) != 1:
+        raise RuntimeError("ACT 02 case-stack anchor is missing or ambiguous")
+    if "</head>" not in html:
+        raise RuntimeError("Generated site head is missing")
+
+    html = html.replace("</head>", f"<style>\n{arrangement_css}\n</style>\n</head>", 1)
+    insertion_point = act2_start + act2.index(anchor)
+    html = html[:insertion_point] + f"{arrangement_html}\n\n" + html[insertion_point:]
+    return html.encode("utf-8")
+
+
 def main() -> None:
-    required = [SOURCE, SCHEME2_DELTA, SCHEME3_DELTA, *BASE_PARTS]
+    required = [
+        SOURCE,
+        SCHEME2_DELTA,
+        SCHEME3_DELTA,
+        ARRANGEMENT_HTML,
+        ARRANGEMENT_CSS,
+        *BASE_PARTS,
+    ]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
     if missing:
         raise FileNotFoundError(f"Missing build input: {', '.join(missing)}")
@@ -97,6 +134,7 @@ def main() -> None:
     v26 = apply_byte_delta(v22, load_delta(BASE_PARTS))
     scheme2 = apply_line_delta(v26, load_delta([SCHEME2_DELTA]), "Scheme 2")
     scheme3 = apply_line_delta(scheme2, load_delta([SCHEME3_DELTA]), "Scheme 3")
+    scheme3 = inject_arrangement_method_story(scheme3)
 
     shutil.rmtree(OUTPUT_DIR, ignore_errors=True)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -111,3 +149,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 0.3 seconds
+Output:
 name: Deploy static site to GitHub Pages
 
 on:
@@ -32,7 +35,7 @@ jobs:
         run: |
           test -f _site/index.html
           test -f _site/.nojekyll
-          echo "81363a9824f1c048311d06cfebd745c3d71c3d9cf4c24ff3f2e6685d4730725a  _site/index.html" | sha256sum --check --strict
+          echo "e69e9b4666588f69cf10cb8524eeef792511dc011e888e572f2fa95493e27772  _site/index.html" | sha256sum --check --strict
           grep -q "Babylon.js網路3D工程檢視器" _site/index.html
           grep -q "ScaffoldLayout" _site/index.html
           grep -q "建築圖自主配置與數量產出" _site/index.html
@@ -49,3 +52,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
