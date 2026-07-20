@@ -225,7 +225,7 @@ def rewrite_act3_story(old: bytes) -> bytes:
     positions = list(markers.values())
     if any(position < 0 for position in positions) or positions != sorted(positions):
         raise RuntimeError(f"ACT 03 replacement is outside the chapter boundary: {markers}")
-    if html.count('<section class="section act3-v40') != 1:
+    if html.count('<section class="section act3 act3-v40') != 1:
         raise RuntimeError("ACT 03 replacement count is not exactly one")
     if html.count('class="act3-v40-input-card"') != 3:
         raise RuntimeError("ACT 03 input roles are incomplete")
