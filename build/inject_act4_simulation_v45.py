@@ -14,11 +14,11 @@ def main() -> None:
     required = [OUTPUT, CSS, PLACEMENT_CSS, JS]
     missing = [str(path.relative_to(ROOT)) for path in required if not path.exists()]
     if missing:
-        raise FileNotFoundError(f"Missing ACT 02 simulation input: {', '.join(missing)}")
+        raise FileNotFoundError(f"Missing ACT 02 twin narrative input: {', '.join(missing)}")
 
     html = OUTPUT.read_text(encoding="utf-8")
     if MARKER in html:
-        print("ACT 02 simulation narrative already injected")
+        print("ACT 02 twin scrollytelling already injected")
         return
 
     if html.count("</head>") != 1 or html.count("</body>") != 1:
@@ -39,19 +39,21 @@ def main() -> None:
         MARKER,
         "document.querySelector('#act2')",
         "act2.appendChild(story)",
-        "原本程式已能重新驗算",
-        "再加入一條不看人工答案的仿真路徑",
-        "差異不是判決，而是審查範圍",
+        "從人工配置稽核",
+        "自主配置前的驗證",
+        "act4TwinCanvasV45",
+        "比較不是判決",
+        "ACT 03：自主配置成立的條件",
     ]
     missing_markers = [marker for marker in required_markers if marker not in html]
     if missing_markers:
-        raise RuntimeError(f"ACT 02 simulation markers are missing: {missing_markers}")
+        raise RuntimeError(f"ACT 02 twin scrollytelling markers are missing: {missing_markers}")
 
     if "document.querySelector('#act4')" in js:
-        raise RuntimeError("Simulation narrative still targets ACT 04")
+        raise RuntimeError("Twin narrative still targets ACT 04")
 
     OUTPUT.write_text(html, encoding="utf-8")
-    print(f"Injected simulation narrative at the bottom of ACT 02 in {OUTPUT}")
+    print(f"Injected ACT 02 twin scrollytelling and 01-03 narrative bridge in {OUTPUT}")
 
 
 if __name__ == "__main__":
