@@ -28,6 +28,9 @@ jobs:
       - name: Build Scheme 3 autonomous configuration website
         run: python build/build_v26.py
 
+      - name: Inject ACT 04 simulation narrative
+        run: python build/inject_act4_simulation_v45.py
+
       - name: Verify generated standalone site
         run: |
           test -f _site/index.html
@@ -48,6 +51,10 @@ jobs:
           grep -q "scheme3-update-v44" _site/index.html
           grep -q "自主系統不是看到 CAD 就直接下答案" _site/index.html
           grep -q "CAD圖元 ≠ 工程條件 ≠ 求解變數" _site/index.html
+          grep -q "act4-simulation-v45" _site/index.html
+          grep -q "原本程式已能重新驗算" _site/index.html
+          grep -q "再加入一條不看人工答案的仿真路徑" _site/index.html
+          grep -q "差異不是判決，而是審查範圍" _site/index.html
           python - <<'PY'
           from pathlib import Path
 
@@ -82,7 +89,11 @@ jobs:
           assert html.count('scheme3-update-v44') >= 2
           assert html.count('自主系統不是看到 CAD 就直接下答案。') == 1
           assert html.count('CAD圖元 ≠ 工程條件 ≠ 求解變數') == 1
-          print("ACT 02 arrangement and ACT 03 structure verified", positions)
+          assert html.count('class="act4-simulation-story-v45"') == 1
+          assert html.count('原本程式已能重新驗算') == 1
+          assert html.count('再加入一條不看人工答案的仿真路徑') == 1
+          assert html.count('差異不是判決，而是審查範圍') == 1
+          print("ACT 02 arrangement, ACT 03 structure, and ACT 04 simulation verified", positions)
           PY
 
       - name: Configure Pages
