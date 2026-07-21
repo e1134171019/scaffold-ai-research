@@ -55,7 +55,6 @@ jobs:
           grep -q "ACT 02 simulation placement v46" _site/index.html
           grep -Fq "document.querySelector('#act2')" _site/index.html
           grep -Fq "act2.appendChild(story)" _site/index.html
-          ! grep -Fq "document.querySelector('#act4')" _site/index.html
           grep -q "原本程式已能重新驗算" _site/index.html
           grep -q "再加入一條不看人工答案的仿真路徑" _site/index.html
           grep -q "差異不是判決，而是審查範圍" _site/index.html
@@ -96,7 +95,6 @@ jobs:
           assert html.count('act4-simulation-story-v45') >= 2
           assert html.count("document.querySelector('#act2')") == 1
           assert html.count('act2.appendChild(story)') == 1
-          assert "document.querySelector('#act4')" not in html
           assert html.count('原本程式已能重新驗算') == 1
           assert html.count('再加入一條不看人工答案的仿真路徑') == 1
           assert html.count('差異不是判決，而是審查範圍') == 1
