@@ -4,19 +4,17 @@
   const MARKER = 'act4-simulation-v45';
 
   function renderSimulationStory() {
-    const act4 = document.querySelector('#act4');
-    const head = act4?.querySelector('.act4-head');
-    const conditionFlow = head?.querySelector('.act4-condition-flow-v41');
-    if (!act4 || !head || !conditionFlow) return;
+    const act2 = document.querySelector('#act2');
+    if (!act2) return;
 
-    act4.classList.add(MARKER);
+    act2.classList.add(MARKER);
 
-    let story = head.querySelector('.act4-simulation-story-v45');
+    let story = act2.querySelector(':scope > .act4-simulation-story-v45');
     if (!story) {
       story = document.createElement('section');
       story.className = 'act4-simulation-story-v45';
       story.setAttribute('aria-labelledby', 'act4SimulationTitleV45');
-      conditionFlow.insertAdjacentElement('afterend', story);
+      act2.appendChild(story);
     }
 
     story.innerHTML = `
@@ -115,11 +113,6 @@
         <strong>預期效果：</strong>原本需要工程師重新看完整張圖，加入仿真後，可以先把問題縮小到真正不同的位置，再針對遺漏、數量、排列或規則原因進行確認。
       </footer>
     `;
-
-    const bridge = head.querySelector('.act4-opening-bridge-v41');
-    if (bridge) {
-      bridge.innerHTML = '<strong>理解原本流程與仿真方法後，下面才開始看三個方案。</strong>它們會共用前面定義的工程條件，但分別處理圖面檢查、案例學習與自主配置。';
-    }
   }
 
   function boot() {
