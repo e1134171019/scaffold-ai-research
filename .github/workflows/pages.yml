@@ -89,7 +89,7 @@ jobs:
           assert html.count('scheme3-update-v44') >= 2
           assert html.count('自主系統不是看到 CAD 就直接下答案。') == 1
           assert html.count('CAD圖元 ≠ 工程條件 ≠ 求解變數') == 1
-          assert html.count('class="act4-simulation-story-v45"') == 1
+          assert html.count('act4-simulation-story-v45') >= 2
           assert html.count('原本程式已能重新驗算') == 1
           assert html.count('再加入一條不看人工答案的仿真路徑') == 1
           assert html.count('差異不是判決，而是審查範圍') == 1
