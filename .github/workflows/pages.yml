@@ -28,7 +28,7 @@ jobs:
       - name: Build Scheme 3 autonomous configuration website
         run: python build/build_v26.py
 
-      - name: Inject simulation narrative at ACT 02 bottom
+      - name: Inject ACT 02 twin scrollytelling
         run: python build/inject_act4_simulation_v45.py
 
       - name: Verify generated standalone site
@@ -52,12 +52,14 @@ jobs:
           grep -q "自主系統不是看到 CAD 就直接下答案" _site/index.html
           grep -q "CAD圖元 ≠ 工程條件 ≠ 求解變數" _site/index.html
           grep -q "act4-simulation-v45" _site/index.html
-          grep -q "ACT 02 simulation placement v46" _site/index.html
+          grep -q "ACT 02 simulation placement v47" _site/index.html
           grep -Fq "document.querySelector('#act2')" _site/index.html
           grep -Fq "act2.appendChild(story)" _site/index.html
-          grep -q "原本程式已能重新驗算" _site/index.html
-          grep -q "再加入一條不看人工答案的仿真路徑" _site/index.html
-          grep -q "差異不是判決，而是審查範圍" _site/index.html
+          grep -q "從人工配置稽核" _site/index.html
+          grep -q "自主配置前的驗證" _site/index.html
+          grep -q "act4TwinCanvasV45" _site/index.html
+          grep -q "比較不是判決" _site/index.html
+          grep -q "ACT 03：自主配置成立的條件" _site/index.html
           python - <<'PY'
           from pathlib import Path
 
@@ -73,7 +75,7 @@ jobs:
           assert positions == sorted(positions), positions
           assert html.count('<section class="method-bridge') == 1
           assert html.count('class="method-step"') == 3
-          assert html.count('建商給的是建築圖，不是施工架配置圖') == 1
+          assert html.count('先從一張已完成的施工架 CAD，理解數量是怎麼形成的') == 1
           assert html.count('本案案例：已完成的傳統框式施工架配置') == 1
           assert html.count('class="act2-role-card') == 2
           assert html.count('class="act2-engineering-detail"') == 1
@@ -95,10 +97,11 @@ jobs:
           assert html.count('act4-simulation-story-v45') >= 2
           assert html.count("document.querySelector('#act2')") == 1
           assert html.count('act2.appendChild(story)') == 1
-          assert html.count('原本程式已能重新驗算') == 1
-          assert html.count('再加入一條不看人工答案的仿真路徑') == 1
-          assert html.count('差異不是判決，而是審查範圍') == 1
-          print("ACT 02 arrangement, ACT 02-bottom simulation, and ACT 03 structure verified", positions)
+          assert html.count('act4TwinCanvasV45') >= 2
+          assert html.count('從人工配置稽核') == 1
+          assert html.count('自主配置前的驗證') >= 1
+          assert html.count('比較不是判決') == 1
+          print("ACT 01-03 narrative, ACT 02 twin scrollytelling, and ACT 03 gates verified", positions)
           PY
 
       - name: Configure Pages
