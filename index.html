@@ -16,17 +16,17 @@
     (async () => {
       const loader = document.getElementById('loader');
       try {
-        const response = await fetch('./施工架AI換算研究_第五篇規則化總結版_v22.html?v=26', { cache: 'no-store' });
+        const response = await fetch('./施工架AI換算研究_第五篇規則化總結版_v22.html?v=52', { cache: 'no-store' });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
         let html = await response.text();
         html = html.replace(
           '</head>',
-          '<link rel="stylesheet" href="./narrative-v23.css?v=26"><link rel="stylesheet" href="./storyline-v26.css?v=26"><link rel="stylesheet" href="./feature-bridge-v24.css?v=26"><style>@media (max-width:760px){.nv-feature-stage-v24:not(:last-child)::after{display:grid}}</style></head>'
+          '<link rel="stylesheet" href="./narrative-v23.css?v=52"><link rel="stylesheet" href="./storyline-v26.css?v=52"><link rel="stylesheet" href="./feature-bridge-v24.css?v=52"><link rel="stylesheet" href="./site-v52.css?v=52"><style>@media (max-width:760px){.nv-feature-stage-v24:not(:last-child)::after{display:grid}}</style></head>'
         );
         html = html.replace(
           '</body>',
-          '<script src="./narrative-v23.js?v=26"><\/script><script src="./feature-bridge-v24.js?v=26"><\/script></body>'
+          '<script src="./narrative-v23.js?v=52"><\/script><script src="./feature-bridge-v24.js?v=52"><\/script><script src="./site-v52.js?v=52"><\/script></body>'
         );
 
         document.open();
