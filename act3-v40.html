@@ -1,73 +1,74 @@
 <section class="section act3 act3-v40" id="act3">
   <div class="act3-v40-wrap">
     <header class="act3-v40-head">
-      <span class="eyebrow">ACT 03 · 問題邊界與自動化判斷</span>
-      <h2>程式不是讀到圖就開始算，<br>先確認這張圖能不能算。</h2>
-      <p>同一個 CAD 檔案，在稽核、歷史案例驗證和建商建築圖配置這三種任務下，判斷方式並不相同。本章先把輸入、判斷和輸出邊界分開。</p>
+      <span class="eyebrow">ACT 03 · 自主配置成立的條件</span>
+      <h2>孿生能重新試排，<br>前提是系統知道自己有沒有資格做決定。</h2>
+      <p>ACT 02 已經示範：把人工圖層藏起來後，程式可以依建築條件重新形成一份配置。但真正的系統不能只靠一張乾淨的 CAD；它還需要專案條件、元件規格、工程規則，以及明確的停止條件。</p>
     </header>
 
     <section class="act3-v40-inputs" aria-labelledby="act3InputTitle">
       <div class="act3-v40-part-head">
-        <span class="act3-v40-kicker">先分清圖面角色</span>
-        <h3 id="act3InputTitle">三種輸入，不能用同一條判斷路徑</h3>
-        <p>建築圖不是施工架配置圖；歷史案例也不是建商固定格式。系統要先知道自己正在處理哪一種資料。</p>
+        <span class="act3-v40-kicker">先補齊自主配置需要的條件</span>
+        <h3 id="act3InputTitle">不是「有圖就能排」，而是三組工程條件要同時成立</h3>
+        <p>建築圖只提供幾何起點。要把幾何轉成施工架配置，系統還必須知道本案怎麼搭、可以用哪些元件，以及遇到衝突時該怎麼停。</p>
       </div>
       <div class="act3-v40-input-grid">
         <article class="act3-v40-input-card">
-          <span>系統輸入</span>
-          <strong>建商建築圖</strong>
-          <p>找出外牆、開口、陽台、退縮與施工範圍，後續再依搭架法與元件規格產生配置候選。</p>
-          <small>目的：建立建築條件，不能直接當成施工架數量。</small>
+          <span>條件 01</span>
+          <strong>建築幾何</strong>
+          <p>外牆、開口、陽台、退縮、施工範圍與可搭設側。</p>
+          <small>回答：施工架要沿著哪裡形成。</small>
         </article>
         <article class="act3-v40-input-card">
-          <span>稽核輸入</span>
-          <strong>已完成施工架 CAD</strong>
-          <p>檢查圖面中的主架、架跨、拉桿、工作板與特殊位置，並與計算結果或人工配置比對。</p>
-          <small>目的：重建、稽核與數量核對。</small>
+          <span>條件 02</span>
+          <strong>專案 Profile＋元件規格</strong>
+          <p>搭架法、樓層、施工側、專案限制，以及架跨、架深、主架與本案允許使用的產品尺寸。</p>
+          <small>回答：這次用哪套條件，以及系統可以拿什麼來配置。</small>
         </article>
         <article class="act3-v40-input-card">
-          <span>驗證資料</span>
-          <strong>歷史案例與人工結果</strong>
-          <p>保留原始圖面、人工配置、正確數量與修改原因，用來驗證規則，不直接當成新案件答案。</p>
-          <small>目的：找出規則成立、失效與未知的範圍。</small>
+          <span>條件 03</span>
+          <strong>工程規則＋停止條件</strong>
+          <p>轉角、短跨、支撐區、收尾、衝突優先序、未知處理與超出邊界時的回報方式。</p>
+          <small>回答：特殊位置怎麼判斷，以及什麼時候不能繼續。</small>
         </article>
       </div>
     </section>
 
-    <div class="act3-v40-main-flow" aria-label="ACT 03判斷流程">
-      <div><span>01</span><b>圖面角色與任務</b><small>稽核、驗證或配置</small></div>
+    <div class="act3-v40-main-flow" aria-label="ACT 03自主判斷流程">
+      <div><span>01</span><b>辨認任務</b><small>稽核、驗證或自主配置</small></div>
       <i>→</i>
-      <div><span>02</span><b>CAD資料可讀性</b><small>單位、圖層、圖塊與幾何</small></div>
+      <div><span>02</span><b>檢查資料</b><small>單位、圖層、圖塊與幾何</small></div>
       <i>→</i>
-      <div><span>03</span><b>工程語意完整度</b><small>建築條件或施工架條件</small></div>
+      <div><span>03</span><b>補齊工程條件</b><small>Profile、元件與施工限制</small></div>
       <i>→</i>
-      <div><span>04</span><b>衝突與未知檢查</b><small>規則、缺件與邊界</small></div>
+      <div><span>04</span><b>檢查衝突</b><small>規則、缺件與未知邊界</small></div>
       <i>→</i>
-      <div><span>05</span><b>AutonomyGate</b><small>決定輸出等級</small></div>
+      <div><span>05</span><b>Autonomy Gate</b><small>決定能做到哪一層</small></div>
     </div>
 
     <section class="act3-v40-gates" aria-labelledby="act3GateTitle">
       <div class="act3-v40-part-head">
         <span class="act3-v40-kicker">三道判斷閘門</span>
-        <h3 id="act3GateTitle">先確認能不能算，再決定要不要自動化</h3>
+        <h3 id="act3GateTitle">先通過條件，再決定要不要讓系統繼續</h3>
+        <p>每一道 Gate 都不是技術表演，而是避免系統把未知當成零、把假設當成正式答案。</p>
       </div>
       <div class="act3-v40-gate-grid">
         <article class="act3-v40-gate-card">
           <span>GATE 01</span>
-          <h4>圖面角色與任務正確嗎？</h4>
-          <p>先確認這是建商建築圖、已完成施工架 CAD，還是歷史驗證資料；同時確認搭架方式、產品規格、施工範圍與本次任務。</p>
-          <div class="act3-v40-checks"><b>輸入類型</b><b>搭架法</b><b>專案 Profile</b></div>
+          <h4>任務與專案條件明確嗎？</h4>
+          <p>先確認這次是在稽核人工圖、驗證歷史案例，還是從建築條件產生候選配置；同時確認搭架法與施工範圍。</p>
+          <div class="act3-v40-checks"><b>任務類型</b><b>搭架法</b><b>施工範圍</b></div>
         </article>
         <article class="act3-v40-gate-card">
           <span>GATE 02</span>
-          <h4>CAD資料與工程條件足夠嗎？</h4>
-          <p>檢查單位、圖層、圖塊、斷線、重複線、轉換差異與必要尺寸。圖面乾淨不代表施工架語意已經存在。</p>
-          <div class="act3-v40-example"><b>建築圖乾淨</b><i>≠</i><strong>可以直接計算施工架</strong></div>
+          <h4>CAD 與工程條件足夠嗎？</h4>
+          <p>檢查單位、圖層、圖塊、斷線、必要尺寸與元件規格。圖面可以打開，不代表已經具備自主配置條件。</p>
+          <div class="act3-v40-example"><b>CAD 可讀</b><i>≠</i><strong>工程條件完整</strong></div>
         </article>
         <article class="act3-v40-gate-card">
           <span>GATE 03</span>
-          <h4>規則衝突或案例超出邊界嗎？</h4>
-          <p>同一位置可能同時遇到轉角、短跨與陽台。系統要依本案規則判斷優先順序，並把衝突、未知與缺件留下來。</p>
+          <h4>規則是否衝突或超出邊界？</h4>
+          <p>同一位置可能同時遇到轉角、短跨、陽台與支撐區。系統必須保留衝突、未知與多候選，不自行挑一個答案掩蓋問題。</p>
           <div class="act3-v40-mini-loop"><b>候選</b><i>→</i><b>衝突檢查</b><i>→</i><b>人工確認</b></div>
         </article>
       </div>
@@ -76,24 +77,24 @@
     <section class="act3-v40-decision" aria-labelledby="act3DecisionTitle">
       <div class="act3-v40-decision-head">
         <span class="act3-v40-kicker">AUTONOMY GATE</span>
-        <h3 id="act3DecisionTitle">輸出不是只有「算」或「不算」</h3>
-        <p>對報價來說，未知不能當成零。系統要把可直接採用、需要確認和必須停止的結果分開。</p>
+        <h3 id="act3DecisionTitle">最後不是只有「成功」或「失敗」</h3>
+        <p>系統要清楚說明自己能直接輸出、只能提出候選，還是必須停止。這三種結果都比默默猜一個數量更可靠。</p>
       </div>
       <div class="act3-v40-output-grid">
         <article>
           <span>OUTPUT 01</span>
-          <strong>直接輸出數量</strong>
-          <p>圖面通過、條件完整、規則沒有衝突，輸出數量與計算依據。</p>
+          <strong>直接計算或生成</strong>
+          <p>資料完整、條件明確、規則沒有衝突，輸出數量、配置與完整計算依據。</p>
         </article>
         <article>
           <span>OUTPUT 02</span>
-          <strong>候選配置＋人工確認</strong>
-          <p>建築條件可讀，但搭架方式、特殊位置或語意仍有多個可能，輸出候選與差異。</p>
+          <strong>候選配置＋差異確認</strong>
+          <p>存在多種合法方式或局部條件仍需確認，輸出候選、差異位置與假設。</p>
         </article>
         <article>
           <span>OUTPUT 03</span>
           <strong>停止並回報缺件</strong>
-          <p>關鍵資料缺少、規則衝突或案例超出目前邊界，輸出位置、原因與待補資料。</p>
+          <p>關鍵資料缺少、規則衝突或案例超出目前邊界，標出位置、原因與待補資料。</p>
         </article>
       </div>
     </section>
@@ -101,12 +102,12 @@
     <section class="act3-v40-roles" aria-labelledby="act3RoleTitle">
       <div class="act3-v40-part-head">
         <span class="act3-v40-kicker">分工邊界</span>
-        <h3 id="act3RoleTitle">程式、AI、專業人員各自負責什麼</h3>
+        <h3 id="act3RoleTitle">程式、AI、工程師各自負責不同層次</h3>
       </div>
       <div class="act3-v40-role-grid">
-        <article><span>規則式程式</span><strong>處理可明確驗證的部分</strong><p>尺寸、幾何、連接、元件數量、硬性約束與結果比對。</p></article>
-        <article><span>AI 輔助</span><strong>提出候選，不直接定案</strong><p>協助處理模糊圖層、文字語意與相似案例，再交給信心閘門判斷。</p></article>
-        <article><span>專業人員</span><strong>確認尚未形式化的部分</strong><p>搭架方式、安全條件、特殊施工限制與系統標記的未知案例。</p></article>
+        <article><span>規則式程式</span><strong>執行可明確驗證的判斷</strong><p>尺寸、幾何、連接、元件數量、硬性約束、候選生成與結果比對。</p></article>
+        <article><span>AI 輔助</span><strong>處理模糊資訊並提出候選</strong><p>協助圖層語意、文字辨識與相似案例搜尋，不直接替工程規則定案。</p></article>
+        <article><span>工程人員</span><strong>確認尚未形式化的條件</strong><p>搭架方式、安全限制、特殊施工情境，以及孿生標出的差異與未知。</p></article>
       </div>
     </section>
 
@@ -115,15 +116,14 @@
       <div class="act3-v40-module-grid">
         <article><span>CAD可讀性</span><b>CadReadabilityEvaluator</b><p>檢查單位、圖層、圖塊、斷線、重複線與未知圖元。</p></article>
         <article><span>轉換檢查</span><b>ConversionFidelityValidator</b><p>比較 DWG／DXF 轉換前後的圖層、圖塊、文字與尺寸差異。</p></article>
-        <article><span>語意判斷</span><b>CadSemanticResolver</b><p>把建築條件、施工架圖元與文字線索整理成工程角色。</p></article>
+        <article><span>語意判斷</span><b>CadSemanticResolver</b><p>把建築幾何、施工架圖元與文字線索整理成工程角色。</p></article>
         <article><span>衝突處理</span><b>RuleConflictResolver</b><p>依搭架法與專案規則處理優先序、覆蓋、重算與停止條件。</p></article>
         <article><span>完整性記錄</span><b>EntityCoverageLedger</b><p>記錄哪些圖元已判斷、哪些未知、哪些衝突，以及是否影響數量。</p></article>
         <article><span>自動化閘門</span><b>AutonomyGate</b><p>依通過條件決定直接輸出、候選確認或停止回報。</p></article>
       </div>
-      <div class="act3-v40-tool-note"><span>底層工具的工程位置</span><p>CAD讀取（ezdxf）→ 幾何運算（Shapely）→ 空間搜尋（R-tree）→ 拓撲關係（NetworkX）→ 已定義約束求解（OR-Tools／CP-SAT）。工具協助執行，不代替工程判斷。</p></div>
+      <div class="act3-v40-tool-note"><span>底層工具的工程位置</span><p>CAD 讀取（ezdxf）→ 幾何運算（Shapely）→ 空間搜尋（R-tree）→ 拓撲關係（NetworkX）→ 已定義約束求解（OR-Tools／CP-SAT）。工具協助執行，不代替工程判斷。</p></div>
     </details>
 
-    <div class="act3-v40-next"><a href="#act4">下一篇：把共同核心落地成三個發展階段 →</a></div>
+    <div class="act3-v40-next"><a href="#act4">下一篇：把這些能力拆成三個發展方案 →</a></div>
   </div>
 </section>
-
